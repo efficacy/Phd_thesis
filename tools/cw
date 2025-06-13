@@ -1,0 +1,5 @@
+#!/bin/bash
+( cd overleaf; git pull )
+cat overleaf/Sections/*.tex >all.tex
+awk -f overleaf/tools/count.awk all.tex >trimmed.tex
+wc -w all.tex trimmed.tex |grep -v total

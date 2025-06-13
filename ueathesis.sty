@@ -1,0 +1,588 @@
+%%%%%%%%%%%%
+%
+% ueathesis 
+% A package to meet the UEA thesis guidelines (see: https://portal.uea.ac.uk/documents/6207125/6873036/Section%2B3%2BTheses%2BNEW/69d413a9-8639-41d5-8fc2-b391b1a4bfb9)  % together with some handy commands and environments for mathematicians.
+% 
+% Version 1.0.1
+% 
+% Compiled by Tom Coleman and Dane Grundy, with thanks to Robert Whittaker for LaTeX knowledge and the UEA PGR office for command suggestions.
+%
+% Questions, comments, bugs? Email either d.grundy@uea.ac.uk, danegrundy@googlemail.com or tdhc@st-andrews.ac.uk
+%
+% The source motivating our typographical decisions is practicaltypography.com
+%
+% CC Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/)
+%
+%%%%%%%%%%%%
+
+\ProvidesPackage{ueathesis}
+
+%%%%%%%%%%%%
+%
+% 1 Initial packages (AMS, list control, fonts, color, graphics etc.)
+%
+%%%%%%%%%%%%
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm} % AMS
+\usepackage{mathtools} % extension to amsmath
+\usepackage{graphicx} % graphic inclusion
+\usepackage{epstopdf} % epstopdf converter for use with PDFLaTeX
+\usepackage{mathrsfs} % script font support
+\usepackage{pdfpages} % support for pdf inclusion
+\usepackage{url} % weblink support
+\usepackage{color,xcolor} % colouring options
+\usepackage{caption} % caption control
+\usepackage{enumerate} % list control
+\usepackage{afterpage} % float control, addition of \clearpage
+\usepackage{lipsum} % dummy text
+\usepackage{xargs,twoopt} % support for commands with extra optional arguments
+\usepackage{hyperref} % hyperlinked internal referencing
+\usepackage{siunitx} % support for SI units
+\usepackage[toc]{appendix} % support for appendicies
+\usepackage{spverbatim} % support for large verbatim environments
+% \usepackage{natbib} % support for natbib
+
+% for non-ASCII characters in bib
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[backend=biber,style=authoryear,natbib=true,uniquename=false,uniquelist=false]{biblatex}
+\addbibresource{references.bib}
+
+
+%%%%%%%%%%%%
+%
+% 2 Layout options
+%
+%%%%%%%%%%%%
+
+% 2.1 Margins
+% 
+% inner > 40mm, rest > 15mm as specified in guidelines (2. (9) iv))
+% If using fancy headers, allow for space.
+% Choice of twosided and onesided margins. Comment in your choice. If onesided, remove twoside from documentclass options; as otherwise will screw up.
+% These choices made in order to preserve 60-70 characters in line width, as specified in guidelines (2. (9) vii))
+
+%% EITHER Two sided margins:
+\usepackage[inner=45mm, outer=30mm, top=30mm, bottom=30mm]{geometry}
+
+%% OR One sided margins:
+%\usepackage[left=45mm, right=30mm, top=30mm, bottom=30mm]{geometry}
+
+% 2.2 Line spacing 
+%
+% Either one and a half or double spacing, as specified in guidelines (2. (9) vii)). setspace allows these commands to work.
+% I prefer double spacing, in order to accommodate inline mathematics. 
+% Comment in your choice.
+
+\usepackage{setspace}
+
+%% EITHER
+\onehalfspacing
+%% OR
+%\doublespacing
+
+% 2.3 Paragraph indentation and skipping
+%
+% The two go hand in hand. You should either have indentation and no paragraph skip (LaTeX has this as default), or have no indentation and a paragraph skip.
+% The commands given below are for the latter (no indentation). Comment these out if you want the former (LaTeX default).
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+% 2.4 Ragged edges 
+%
+% UEA guidelines state that ``Word division at the ends of lines should be avoided if possible'' ; these commands do this.
+% Comment out to return to LaTeX default, which is right justified text.
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% 2.5 Font choices
+%
+% Here are some different font choices you can try. Please note that some choices here do not change mathematics, but some do (Fourier). Use wisely.
+% These are a small subset of all possible fonts. Choices made as per `good fonts' on Practical Typography (ie not on F-list).
+% WARNING: Some font packages do not agree with custom commands in 5.
+
+\usepackage[utf8]{inputenc} % required for alternative font
+
+%% EITHER NONE (comment all out for Computer Modern Roman) OR
+%\usepackage{charter}
+%% OR
+%\usepackage{fourier}
+%% OR
+%\usepackage{helvet}
+%% OR
+%\usepackage{lmodern}
+%% OR
+%\usepackage{palatino}
+%% OR
+%\usepackage{times}
+
+
+
+% 2.6 Fancy headings
+%
+% There are two settings for fancy headings below; one for a two sided thesis, one for a one sided thesis. Of course, you can decide not to have fancy headings. Comment in your choice.
+% Choices in this section were as in Tom's thesis; of course you can change all of these. Nice customisation options are available at https://www.sharelatex.com/learn/Headers_and_footers
+
+\usepackage{fancyhdr}
+
+%% EITHER Two sided fancy headings
+
+\pagestyle{fancy}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{ \markboth{\chaptername\ \thechapter:\ #1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{\thesection\ #1}{} }
+
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{ \nouppercase{\leftmark}} }
+\fancyhead[LO]{\textit{ \nouppercase{\rightmark}} }
+
+\fancypagestyle{plain}{ %
+ \fancyhf{} % remove everything
+ \renewcommand{\headrulewidth}{0pt} 
+ \renewcommand{\footrulewidth}{0pt}
+}
+
+%% OR One sided fancy headings
+
+% \pagestyle{fancy}
+% \setlength{\headheight}{15.2pt}
+% \pagestyle{fancy}
+% \renewcommand{\chaptermark}[1]{ \markboth{\chaptername\ \thechapter:\ #1}{} }
+% \renewcommand{\sectionmark}[1]{ \markright{\thesection\ #1}{} }
+
+% \fancyhf{}
+% \rhead{\thepage}
+% \lhead{\textit{ \nouppercase{\leftmark}} }
+
+
+% \fancypagestyle{plain}{ %
+%   \fancyhf{} % remove everything
+%   \renewcommand{\headrulewidth}{0pt} 
+%   \renewcommand{\footrulewidth}{0pt}
+% }
+
+%%%%%%%%%%%%
+%
+% 3 Machinery for environment numbering and internal referencing
+%
+%%%%%%%%%%%%
+
+% NB: All numbering used is arabic numerals (except for appendices, to distinguish) as per guidelines 2. (9) xi).
+
+% 3.1 Hyperlink display choices
+% 
+% Options abound! Choice of boxes around hyperlinked (default), coloured text, or no link visible (commands given below). Comment your choice in.
+
+%% EITHER Frames, black text (default)
+
+%% OR No frames, coloured text
+\hypersetup{colorlinks = true, linkbordercolor = {white}}
+
+%% OR No frames, black text
+%\hypersetup{colorlinks = false, linkbordercolor = {white}}
+
+% 3.2 Equation numbering 
+%
+% Default in LaTeX book class is by chapter (eg Equation 1.1 for first equation in chapter 1, section 1). The commands below ensure equation numbering by section (eg Equation 1.1.1 for first equation in chapter 1, section 1). Simply comment out if you wish to refer to default.
+
+\makeatletter
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\@addtoreset{equation}{section}
+\makeatother
+
+% 3.3 Figure and table numbering 
+%
+% Default figure/table numbering is by chapter; these commands sets it to section respectively. Comment these in or out as required.
+
+\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+
+% 3.4 Theorem environments and numbering
+%
+% Tom's pride and joy
+% This huge block of text defines different theorem environments, counters to ensure that they all run on the same numbering sequence, and also definitions of autoref names so that when you autoref a theorem/section/chapter, it includes the *type* of theorem as well as the number.
+% There are two options included for this; one for those who like to write out the environment name in full (like \begin{theorem}), and one for those who abbreviate (like \begin{thm}). Simply comment in your choice. If you wish to change this counter to reflect your current environment names, then the second option is probably easier to edit.
+
+\usepackage{aliascnt}
+
+%% EITHER Longer environment names (\begin{theorem}, \begin{corollary}, etc)
+
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma} 
+\aliascntresetthe{lemma}
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}   
+\aliascntresetthe{proposition}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+\newaliascnt{conjecture}{theorem}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\aliascntresetthe{conjecture}   
+\def\lemmaautorefname{Lemma}
+\def\propositionautorefname{Proposition}
+\def\theoremautorefname{Theorem}
+\def\corollaryautorefname{Corollary}
+\def\questionautorefname{Question}
+\def\definitionautorefname{Definition}
+\def\conjectureautorefname{Conjecture}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+\def\chapterautorefname{Chapter}
+\def\Appendixautorefname{Appendix}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem*{answer}{Answer}
+\newtheorem*{claim}{Claim}
+\newtheorem*{claim1}{Claim 1}
+\newtheorem*{claim2}{Claim 2}
+\newtheorem*{claim3}{Claim 3}
+\newtheorem*{case1}{Case 1}
+\newtheorem*{case2}{Case 2}
+\newtheorem*{case3}{Case 3}
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\def\exampleautorefname{Example}
+\newaliascnt{examples}{theorem}
+\newtheorem{examples}[examples]{Examples}
+\aliascntresetthe{examples}
+\def\examplesautorefname{Examples}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\def\definitionautorefname{Definition}
+\newaliascnt{notation}{theorem}
+\newtheorem{notation}[notation]{Notation}
+\aliascntresetthe{notation}
+\def\notationautorefname{Notation}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{remarks}{Remarks}
+
+%% OR Abbreviated environment names (\begin{thm}, \begin{cor}, etc)
+
+%\newtheorem{thm}{Theorem}[section]
+%\newaliascnt{lem}{thm}
+%\newtheorem{lem}[lem]{Lemma}
+%\aliascntresetthe{lem}
+%\newaliascnt{prop}{thm}
+%\newtheorem{prop}[prop]{Proposition}
+%\aliascntresetthe{prop}
+%\newaliascnt{cor}{thm}
+%\newtheorem{cor}[cor]{Corollary}
+%\aliascntresetthe{cor}
+%\newaliascnt{que}{thm}
+%\newtheorem{que}[que]{Question}
+%\aliascntresetthe{que}
+%\newaliascnt{conj}{thm}
+%\newtheorem{conj}[conj]{Conjecture}
+%\aliascntresetthe{conj}
+%
+%\theoremstyle{definition}
+%\newaliascnt{ex}{thm}
+%\newtheorem{eg}[ex]{Example}
+%\aliascntresetthe{ex}
+%\newaliascnt{exs}{thm}
+%\newtheorem{egs}[ex]{Examples}
+%\aliascntresetthe{ex}
+%\newaliascnt{def}{thm}
+%\newtheorem{defn}[def]{Definition}
+%\aliascntresetthe{def}
+%\newaliascnt{not}{thm}
+%\newtheorem{not}[not]{Notation}
+%\aliascntresetthe{not}
+%\newaliascnt{rmk}{thm}
+%\newtheorem{rmk}[rmk]{Remark}
+%\aliascntresetthe{rmk}
+%\newaliascnt{rmks}{thm}
+%\newtheorem{rmks}[rmks]{Remarks}
+%\aliascntresetthe{rmks}
+%
+%\def\lemautorefname{Lemma}
+%\def\propautorefname{Proposition}
+%\def\thmautorefname{Theorem}
+%\def\corautorefname{Corollary}
+%\def\queautorefname{Question}
+%\def\defautorefname{Definition}
+%\def\conjautorefname{Conjecture}
+%\def\exautorefname{Example}
+%\def\exsautorefname{Examples}
+%\def\defautorefname{Definition}
+%\def\rmkautorefname{Remark}
+%\def\rmksautorefname{Remarks}
+%\def\sectionautorefname{Section}
+%\def\subsectionautorefname{Subsection}
+%\def\chapterautorefname{Chapter}
+%\def\Appendixautorefname{Appendix}
+%\def\notationautorefname{Notation}
+%
+%\newtheorem*{answer}{Answer}
+%\newtheorem*{claim}{Claim}
+%\newtheorem*{claim1}{Claim 1}
+%\newtheorem*{claim2}{Claim 2}
+%\newtheorem*{claim3}{Claim 3}
+%\newtheorem*{case1}{Case 1}
+%\newtheorem*{case2}{Case 2}
+%\newtheorem*{case3}{Case 3}
+
+%%%%%%%%%%%%
+%
+% 4 Tabular and drawing options
+%
+%%%%%%%%%%%%
+
+% 4.1 Table packages and spacing 
+%
+% Here are some useful packages for tables.
+
+\usepackage{hhline,multirow,longtable}
+
+%% Sometimes LaTeX clips entries in tables with a \hline; this command avoids this possibility and makes the tables neater. This code renews the array stretch for all table environments in your document, but not for matrices/other arrays, or tables inside a figure environment. To change the row spacing on an individual basis, put \renewcommand{\arraystretch}{no} just after the \begin{table} or \begin{figure} command.
+
+\makeatletter
+\renewenvironment{table}
+    {\renewcommand{\arraystretch}{1.5}%
+     \@float{table}}
+    {\end@float}
+\makeatother
+
+
+% 4.2 Tikz packages and libraries
+
+\usepackage{xy}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,decorations.pathreplacing,shapes,matrix,arrows,decorations.markings,automata,backgrounds,intersections,patterns,shapes,trees}
+\usepackage{pgfplots} %for plotting mathematical functions directly into TiKz
+\pgfplotsset{compat=newest}
+
+% 4.3 Some useful tikz arrows (half way arrows, third way arrows, arrowheads in middle of line rather at end) 
+
+\tikzset{draw half paths/.style 2 args={%
+  decoration={show path construction,
+    lineto code={
+      \draw [#1] (\tikzinputsegmentfirst) -- 
+         ($(\tikzinputsegmentfirst)!0.5!(\tikzinputsegmentlast)$);
+      \draw [#2] ($(\tikzinputsegmentfirst)!0.5!(\tikzinputsegmentlast)$)
+        -- (\tikzinputsegmentlast);
+    }
+  }, decorate
+}}
+\tikzset{draw third paths/.style 2 args={%
+  decoration={show path construction,
+    lineto code={
+      \draw [#1] (\tikzinputsegmentfirst) -- 
+         ($(\tikzinputsegmentfirst)!0.33!(\tikzinputsegmentlast)$);
+      \draw [#2] ($(\tikzinputsegmentfirst)!0.67!(\tikzinputsegmentlast)$)
+        -- (\tikzinputsegmentlast);
+    }
+  }, decorate
+}}
+\tikzset{draw 2third paths/.style 2 args={%
+  decoration={show path construction,
+    lineto code={
+      \draw [#1] (\tikzinputsegmentfirst) -- 
+         ($(\tikzinputsegmentfirst)!0.67!(\tikzinputsegmentlast)$);
+      \draw [#2] ($(\tikzinputsegmentfirst)!0.33!(\tikzinputsegmentlast)$)
+        -- (\tikzinputsegmentlast);
+    }
+  }, decorate
+}}
+
+\tikzset{middlearrow/.style={
+        decoration={markings,
+            mark= at position 0.5 with {\arrow{#1}} ,
+        },
+        postaction={decorate}
+    }
+}
+
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+  
+%%%%%%%%%%%%
+%
+% 5 Custom commands and macros
+%
+%%%%%%%%%%%%
+
+% Required custom commands for typesetting (do not modify)
+
+\providecommand\phantomsection{}
+
+% 5.1 Todo notes support
+%
+% These commands support various types of todo notes.
+  
+\setlength{\marginparwidth}{2cm}
+\usepackage[colorinlistoftodos,prependcaption,textsize=footnotesize]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+% 5.2 New mathematical operators/indicators
+
+%% Functions:
+
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\cosech}{cosech}
+
+%% Algebraic:
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Gel}{Gel}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Lim}{Lim}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\rad}{rad}
+
+% 5.3 Math fonts:
+
+\newcommand{\mb}[1]{\mathbb{#1}} % blackboard bold
+\newcommand{\mc}[1]{\mathcal{#1}} % calligraphic font
+\newcommand{\mf}[1]{\mathfrak{#1}} % mathfrak font
+\newcommand{\ms}[1]{\mathscr{#1}} % script font
+
+% 5.4 Labelled arrows for inline mathematics
+%
+% With optional arguments to shorten arrow commands.
+
+\newcommand{\larr}[1][]{\xleftarrow{#1}} % labelled left arrow
+\newcommand{\rarr}[1][]{\xrightarrow{#1}} % labelled right arrow
+\newcommand{\Rarr}[1][]{\xRightarrow{#1}} % labelled implication arrow
+\newcommand{\from}{\leftarrow} % unlabelled left arrow
+
+% 5.5 Advanced bracketing
+
+\usepackage{stmaryrd} % provides double brackets
+
+% 5.6 Mathematical diacritics (bars, hats etc.)
+
+%% Really wide hat
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\reallywidehat[1]{%
+\savestack{\tmpbox}{\stretchto{%
+   \scaleto{%
+\scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+     {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+   }{\textheight}%
+}{0.5ex}}%
+\stackon[1pt]{#1}{\tmpbox}%
+}
+
+% 5.7 Vectors and matrices
+
+\newcommand{\onetwo}[2]{\begin{pmatrix} #1 \\ 
+#2 \\ \end{pmatrix}} % column vector, 2 entries
+\newcommand{\onethree}[3]{\begin{pmatrix} #1 \\ 
+#2 \\ #3 \end{pmatrix}} % column vector, 3 entries
+\newcommand{\onefour}[4]{\begin{pmatrix} #1 \\
+#2 \\ #3 \\ #4 \end{pmatrix}} % column vector, 4 entries
+\newcommand{\onen}[3]{\begin{pmatrix} #1 \\
+#2 \\ \vdots \\ #3 \end{pmatrix}} % column vector, n entries
+\newcommand{\threetwo}[6]{\begin{pmatrix} 
+    #1 & #2 & #3 \\ #4 & #5 & #6
+  \end{pmatrix}} % matrix, 2 rows, 3 columns
+\newcommand{\twotwo}[4]{\begin{pmatrix} 
+    #1 & #2 \\
+    #3 & #4 
+  \end{pmatrix}} % 2 by 2 square matrix
+\newcommand{\threethree}[9]{\begin{pmatrix}
+    #1 & #2 & #3 \\
+    #4 & #5 & #6 \\
+    #7 & #8 & #9 
+\end{pmatrix}} % 3 by 3 square matrix
+\newcommand{\nbyn}[9]{\begin{pmatrix}
+    #1      & #2     & \dots  & #3 \\
+    #4      & #5     & \dots  & #6\\
+    \vdots  & \vdots & \ddots & \vdots   \\
+    #7      & #8     & \dots  & #9  
+\end{pmatrix}}
+
+% 5.8 Calculus and summations
+
+\newcommand{\PD}[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}} % partial derivatives for one variable
+\newcommand{\D}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}  % ordinary derivatives
+\newcommand{\PDxy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}} % partial derivatives for multiple variables
+\newcommand{\intinf}[2]{\int^\infty_{-\infty} #1\, \mathrm{d}#2} % integral between -infty and infty
+\newcommandtwoopt{\intbc}[4][][]{\int_{#1}^{#2} #3\, \mathrm{d} #4} %integrate #3 between #1 and #2, w.r.t. #4
+\newcommand{\dint}[8][\!\!]{\int_{#2}^{#3}\!\! #1 \int_{#4}^{#5} #6\, \mathrm{d} #7\, \mathrm{d} #8}
+\newcommand{\tintd}[4]{#1\, \mathrm{d} #2\, \mathrm{d} #3\, \mathrm{d} #4}
+\newcommandtwoopt{\tintl}[8][\!\!][\!\!]{\int_{#3}^{#4}\!\! #1 \int_{#5}^{#6}\!\! #2 \int_{#7}^{#8}} %integrate #3 between #1 and #2, w.r.t. #4
+\newcommand{\sumtxt}[2]{\sum\limits_{#1}^{#2}}  %summation between limits #1 and #2 for use in text mode
+\newcommand{\prodtxt}[2]{\prod\limits_{#1}^{#2}} %product between limits #1 and #2 for use in text mode
+
+
+% 5.9 SI unit handling
+% \newcommand*{\unit}[1]{\ensuremath{\mathrm{\,#1}}}
+
+\DeclareMathAccent{\ring}{\mathalpha}{operators}{"17}
+\newcommand*{\angs}{\ensuremath{\smash{\mathrm{\ring A}}}}
+\newcommand*{\ohm}{\ensuremath{\mathrm{\Omega}}}
+\newcommand*{\degree}[1][]{\ensuremath{\mathrm{^\circ #1}}}
+\usepackage{upgreek}
+\newcommand*{\micro}{\ensuremath{\upmu}}
+
+% 5.10 Properly typeset numerical constants
+
+\providecommand*{\eu}{\ensuremath{\mathrm{e }}} % e = 2.718..., the base of natural logarithms
+\providecommand*{\iu}{\ensuremath{\mathrm{i }}} % The imaginary unit i (for civilised people)
+\providecommand*{\ju}{\ensuremath{\mathrm{j }}} % The imaginary unit j (for savages)
+
+% 5.11 Superscripts/subscripts that don't italicise text
+
+\newcommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
+\newcommand*{\ap}[1]{\ensuremath{^\mathrm{#1}}}
+
+% 5.12 Miscellaneous
+
+\newcommand{\stl}{\;\left|\right.\;} % such that line, set builder notation
+\newcommand{\stc}{\; : \;} % such that colon, set builder notation
+\newcommand{\dne}{\hfill \qed \vspace{0.3cm}} % end of proof symbol
+\newcommand{\abs}[1]{\left|#1\right|} % modulus signs
+\newcommand{\norm}[1]{\left|\left|#1\right|\right|} % norm signs
+
+% better empty set
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing 
+
+% actual Re
+\let\oldRe\Re
+\renewcommand{\Re}{\mathrm{Re}} 
+
+% actual Im
+\let\oldIm\Im
+\renewcommand{\Im}{\mathrm{Im}}
+
+%%%%%%%%%

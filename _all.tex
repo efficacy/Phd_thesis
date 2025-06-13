@@ -1,0 +1,108 @@
+% For twosided version:
+% - change oneside in class options to twoside
+% - change margins to two sided version in ueathesis.sty
+% - change fancy headings to two sided version in ueathesis.sty
+% - save ueathesis.sty and rebuild this file
+
+\documentclass[11pt,twoside]{ueathesis}
+\usepackage{ueathesis}
+\usepackage{csquotes}
+\usepackage{epigraph}
+\usepackage{booktabs}
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true
+}
+\usepackage{syntax}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{svg}
+
+\usepackage[nonumberlist,toc]{glossaries}
+%\makeglossaries[title=Glossary, toctitle=Glossary]
+\makeglossaries
+
+\usepackage{framed}
+% for annotations such as boxes and bars round te
+
+% includes to help deal with problem characters in urls
+\usepackage[strings]{underscore}
+\usepackage{url}
+
+\usepackage{silence}
+\WarningsOff[everypage]% Suppress warnings related to package everypage
+
+\usepackage{datetime}
+\newdateformat{universaldate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+
+\usepackage{longtable}
+\usepackage{tablefootnote} % supoport footnotes in tables
+\usepackage{makecell} % support splitting lines in tables
+
+\hypersetup{
+    hidelinks,
+    colorlinks=false,
+}
+
+\input{autoref}
+\usepackage{cleveref}
+
+\newcommand{\DocTitle}{Sustainable Software Systems: An investigation into comparing the performance and energy consumption of software components}
+\newcommand{\AuthorName}{Francis Kenneth Carver}
+\newcommand{\SubmissionMonth}{March}
+\newcommand{\SubmissionYear}{2024}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\def\subsectionautorefname{Section}
+\def\subsubsectionautorefname{Section}
+
+\renewcommand\floatpagefraction{0} %default 0.5
+
+\makeatletter
+\newcommand\subsubsubsection{\@startsection{paragraph}{4}{\z@}{-2.5ex\@plus -1ex \@minus -.25ex}{1.25ex \@plus .25ex}{\normalfont\normalsize\bfseries}}
+% \newcommand\subsubsubsubsection{\@startsection{subparagraph}{5}{\z@}{-2.5ex\@plus -1ex \@minus -.25ex}{1.25ex \@plus .25ex}{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{1em}{3.2em}}
+\makeatother
+
+\BeforeBeginEnvironment{verbatim}{\def\baselinestretch{1}}
+
+\citetrackerfalse
+
+\begin{document}
+
+\pagenumbering{gobble}
+\input{00-Preamble.tex}
+
+\clearpage
+\pagenumbering{arabic}
+
+\input{01-Chapters.tex}
+
+\clearpage
+\addcontentsline{toc}{chapter}{References}
+\pagestyle{plain}
+\renewcommand\bibname{References}
+\raggedright
+\printbibliography
+
+\input{Sections/00-Glossary.tex}
+
+\captionsetup[figure]{list=no}
+\captionsetup[table]{list=no}
+\captionsetup[lstlisting]{list=no}
+% \addtocontents{toc}{\setcounter{tocdepth}{0}}
+\input{02-Appendices.tex}
+
+\input{Sections/03-changes.tex}
+
+\end{document}

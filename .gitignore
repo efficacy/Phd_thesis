@@ -1,0 +1,13 @@
+*.aux
+*.bbl
+*.blg
+*.fdb*
+*.fls*
+*.lof*
+*.log*
+*.lot*
+*.out
+*.sync*
+*.tdo
+*.toc
+_all.pdf

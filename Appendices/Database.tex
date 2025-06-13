@@ -1,0 +1,36 @@
+\chapter{SQL Creation Script for the LOG Database}
+\label{appendix:database}
+
+The following SQL creation script is run when the LOG database is created or to clear all data and reset the system.
+
+Note that the session table is named \verb!session2!. There was a table named \verb!session! in an earlier version of the LOG database but this did not contain enough columns so a new table was created. The old  \verb!session! table is no longer used.
+
+\begin{verbatim}
+DROP TABLE IF EXISTS log;
+CREATE TABLE log (
+    t timestamptz,
+    v double precision,
+    i double precision,
+    PRIMARY KEY(t)
+);
+
+DROP TABLE IF EXISTS session2;
+CREATE TABLE session2 (
+    scenario varchar(32),
+    session varchar(32),
+    status char,
+    start timestamp with time zone,
+    stop timestamp with time zone,
+    base_start timestamp with time zone,
+    base_stop timestamp with time zone,
+    avg_baseline decimal,
+    avg_active decimal,
+    total_active decimal,
+    extra_active decimal,
+    description text,
+    PRIMARY KEY(scenario,session)
+);
+
+GRANT ALL ON log TO logger;
+GRANT ALL ON session2 TO logger;
+\end{verbatim}

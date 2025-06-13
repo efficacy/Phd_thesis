@@ -1,0 +1,714 @@
+%\listchanges
+\renewcommand\chaptername{Submission Notes} % for fancy headings, please do not change 
+\chapter*{List of Corrections}
+
+\newcommand{\p}[1]{\pageref{#1}}
+
+\begin{longtable}{>{\raggedright} p{0.06\linewidth} | >{\raggedright} p{0.42\linewidth} | >{\raggedright} p{0.39\linewidth} | p{0.045\linewidth}}
+    & \textbf{Comment} & \textbf{Change} & \textbf{Loc} \\
+    \hline
+    \multicolumn{4}{c}{Observations} \\
+    \hline
+    OB1 & The thesis is generally well-written (style-wise) but poorly structured
+    & Restructured. & \\
+
+    OB2 & Content is often inaccurate when it comes to quantitative/scientific reporting where conclusions are drawn on sporadic (cherry-picked) data and observations. In other words, more scientific rigour is needed.
+    & Major updates. & \\
+
+    \hline
+    \multicolumn{4}{c}{Internal Examiner Comments} \\
+    \hline
+
+    IN1 & Chapter 1 - See external's comments
+    & See E6, E7, E8, E9, E10, E11. & \\
+
+    IN2 & Chapter 2 – See External’s comments
+    & See E12, E13. & \\
+
+    IN3 & Note that Various references are quite old (>20 years) which can defeat their purpose when used for a current trend. A good example is 2.4.5.5. (p43) op the increasing trend of open-source software that cites a reference of 1999! OS commercial software is on the rise and needs a current reference to back that up!
+    & Updated references in many places. & \p{IN3} \\
+
+    IN4 & A glossary is needed which becomes apparent from section 3.1. where various terminology (and its confusion) is discussed that are crucial for the remainder of the thesis.
+    & Added a glossary. & \p{glossary} \\
+
+    IN5 & Chapter 3 – see External’ comments. Also bear in mind that this chapter needs better structure as it currently reads like a “brain dump”. Subsection titles seem arbitrary without conveying information about their content.
+    & This chapter has been extensively re-structured and edited for better flow and content. & \p{chapter:context} \\
+
+    IN6 & It starts with a confusing statement on ICT and computing that needs better elaboration and a clear distinction between the two terms. 
+    & Cleaned up terminology and referred to glossary. & \p{chapter:context}  \\
+
+    IN7 & Section 3.3.1 needs restructuring as it contradicts itself (see more specific comments in PDF). Perhaps the best solution is changing the title of 3.3.1.
+    & Revisited and re-ordered this whole section and swapped to chapter 2  to make it clearer. & \p{literature:gap} \\
+
+    IN8 & Chapter 4 needs to be removed.
+    & Removed. & \\
+
+    IN9 & Chapter 5 – see External’s comments. Note that Section 5.1.4. does not feel like a rounded literature review on template engines but rather a collection of cherry-picked references. Please improve this literature review by being more comprehensive.
+    & The literature chapter has been extensively reorganised and edited to add rigour and flow. & \p{chapter:literature}\\
+
+    IN10 & Section 5.4 lacks rigour. In particular the confusion in time (seconds vs milliseconds) needs to be sorted as it’s a factor 1000 different.
+    & Overall editing pass to make sure timings are correct. & \p{fs:results} \\
+
+    IN11 & Section 5.4.1. does not cover all engines analysed.
+    & Restructured to mention all the engines. & \p{sub:individual template engines} \\
+
+    IN12 & In section 5.7.2. “a period” is mentioned between the feasibility study and later studies. This period may be quite long (considering the claim that software has substantially changed). Keeping in mind the many outdated references (comment 3) it seems that this work may well span a substantial number of years that in the context of a fast-changing subject may be detrimental. This needs at least justification (to avoid having to redo the feasibility study).
+    & Clarified the amount of time between the feasibility study and the rest of the research. Now refers to the new timeline in chapter 1. & \p{section:comp:changes} \\
+
+    IN13 & The new experiments that are covered in sections 5.9 and 5.10 are littered with code-specific details on plugins that belong in an appendix rather than in the main text body. Here, the main gist and architecture of the improved experiment should be given instead (which is missing).
+    & Code examples moved to an appendix. & \p{section:comp:test replication} \\
+
+    IN14 & The experimental results in 5.11. need more clarity with regards to the different waves – see also specific comments in annotated dissertation.
+    & Reorganised to explain and emphasise the stages of the process and changed the term 'wave' to 'measurement set'. & \p{fs2:results} \\
+
+    IN15 & Chapter 6 – See External comments.
+    & See E24, E25. & \\
+
+    IN16 & Please comment as to how “user friendly” the proposed device to compare energy consumption of candidate components is, i.e. what is the time needed to set up experiments?
+    & Added a section evaluating the apparatus against the initial requirements, including ease of use. & \p{testrig:evaluation} \\
+
+    IN17 & Chapter 7 needs to become an appendix as it does not fit into the normal thread of the dissertation. A complete example of an IL script and its translation/mapping into one or more of the popular template engine’s languages should be provided as well. Also, to what extent has this mapping been tested?
+    & Chapter moved to an appendix. & \\
+
+    IN18 & Current section 7.7 is speculative by excessively questioning the original proposed IL. I suggest you delete it.
+    & Chapter moved to an appendix. & \\
+
+    IN19 & Section 7.8.2 on commonalities of different template languages – this should be covered much earlier.
+    & extracted from chapter 7 and moved to the performance chapter. & \p{section:comp:languages} \\
+
+    IN20 & Section 7.9 – where are the actual test results?
+    & Chapter moved to an appendix. & \\
+
+    IN21 & Chapter 8 – See External’s comments.
+    & See E27, E28. & \\
+
+    IN22 & Please comment as to how monitoring CPU and memory usage alongside the current (more elaborate!) experiments could (or should not) be used as a benchmark (or at least for comparative purposes).
+    & Added a section describing the use of the apparatus in conjunction with other approaches. & \p{collaboration} \\
+
+    IN23 & Section 8.2.1 – relative performances should be reported instead of absolute (see also comment in PDF). More rigorous reporting is needed rather than cherry-picked observations. Note that 8.3 does do a better job on this by producing plots that are comparable (unlike the colour coded curves in the earlier plots).
+    & Rewrote to discuss specific performance results and included comparison graphs to illustrate the points. & \p{dut vs pc} \\
+
+    IN24 & The results in Table 8.2 needs a statistical rank order test (Kendall Tau aka Kendall’s Correlation) to assess whether the results in the two columns follow the same rank order (null hypothesis) or not.
+    & Added a section on Kendall's $\tau$ and analysis. & \p{IN24} \\
+
+    IN25 & Chapter 9 – see External’s comments.
+    & See E29. & \\
+
+    \hline
+    \multicolumn{4}{c}{External Examiner Comments} \\
+    \hline
+
+    E1 & Abstract - In light of the significant changes in restructuring, content, and contribution the abstract will need to be rewritten to reflect the new changes.
+    & Rewrote abstract to match new structure and content. & \\
+
+    E2 & TOC - In light of the significant changes in restructuring the table of contents must be updated to reflect the new changes
+    & TOC automatically updated following changes. & \\
+
+    E3 & List of Figures - In light of the significant changes in restructuring and content, the list of figures must be updated to reflect the new changes
+    & List of figures automatically updated following changes. & \\
+
+    E4 & List of Tables - In light of the significant changes in restructuring and content, the list of tables must be updated to reflect the new changes
+    & List of figures automatically updated following changes. & \\
+
+    E5 & Listings - In light of the significant changes in restructuring and content, the listings must be updated to reflect the new changes
+    & List of listings automatically updated following changes. & \\
+
+    E6 & Ch1 - in light of the significant changes in restructuring and content, chapter 1 must be updated to reflect the new changes.
+    & Chapter 1 extensively updated and restructured. & \p{chapter:introduction} \\
+
+    E7 & Remove the significant number of generalisations and unsupported statements or use references to support those arguments
+    & Tightened up the introduction, less generalisations, more references. & \p{chapter:introduction} \\
+
+    E8 & Section 1.1 would benefit significantly from having more quantifiable evidence to support your primary argument. For example, you could include evidence suggesting what the impact of ICT emissions are predicted to be by 2030.
+    & Updated the introduction, added energy use and emissions projections to chapter 1. & \p{E8} \\
+
+    E9 & Include a clear aim and set of measurable objectives.
+    & Addressed with the general chapter 1 improvements. & \p{E8} \\
+
+    E10 & Relevance of mapping to UN sustainability goals needs to be significantly expanded and it's relevant to demonstrated.
+    & The concept of sustainability is key to the whole thesis, so is now introduced in the introduction including the relevance of mapping to the UN Goals. & \p{section:intro about} \\
+
+    E11 & Section 1.4 needs to be updated to reflect the new structure that will result from the changes suggested by the examination team.
+    & Updated. & \p{section:thesis structure} \\
+
+    E12 & Ch2 - Overall, the presentation of this chapter needs to be rethought in terms of what it contributes to the core of the thesis.
+    & Emphasised the importance of this chapter, which is now moved to chapter 3, in chapter 1 and discussed the relevance at the start of this chapter. Rewrote and reorganised. & \p{section:intro about} \p{chapter:context} \\
+
+    E13 & Section 2.4 could be significantly improved in presenting the differences between types of software in terms of their classification rather than Level 4 sub sections in its current form. The use of level 4 subheadings is a red flag and should be avoided. Consider using a table to present the key differences.
+    & Converted to tables and summarised. & \p{section:context development} \\
+
+    E14 & Ch3 - Overall, the structuring of this chapter needs to be significantly improved ideally by removing or adjusting this sub sectioning.
+    & Re-worked the chapter structure and included literature sections from other chapters as per E21 etc. & \p{chapter:literature} \\
+
+    E15 & It is unclear from the sub sections dealing with sustainability how a reader should understand the use of sustainability within the context of this thesis beyond this section. You're not required to provide a new definition of sustainability but you must state how the concept should be interpreted in the context of your work.
+    & The concept of sustainability is key to the whole thesis, so is now discussed in more detail in the introduction. & \p{section:intro about} \\
+
+    E16 & Section 3.2.3 should not be a separate subsection in the literature review but woven into its overall narrative.
+    & Re-organised literature review chapter for better flow. & \p{chapter:literature} \\
+
+    E17 & Section 3.3.2 appears to be contextual to the work being presented and would be better placed in chapter 2 which provides the context for your work. As it stands there is no review of any relevant literature in this section.
+    & Swapped sections of chapters 2 and 3 for a more understandable flow. & \p{literature:gap} \\
+
+    E18 & Section 3.4 would be better placed in introductory chapter rather than buried at the end of the literature review.
+    & Research scope and objectives are now introduced in chapter 1. & \p{section:scope and objectives} \\
+
+    E19 & Ch4 - it is not clear what the contribution of this chapter is to the overall problem being addressed and as discussed we strongly advise that this chapter is removed
+    & Removed this chapter as per IN8. & \\
+
+    E20 & Ch5 - Overall, the presentation and structuring of this section needs to significantly improve the readability and narrative of the work.
+    & Chapter re-organised and edited to improve flow. & \p{chapter:performance} \\
+
+    E21 & Section 5.1.4 would be better placed within the literature review in chapter 3; although we appreciate why it is placed in this specific section.
+    & moved to the main literature review. & \p{literature:templating} \\
+
+    E22 & The methodological description of the work carried out in this section needs to be significantly improved in terms of its clarity, description, and justification and rationale.
+    & Chapter re-organised and edited to improve flow. & \p{fs1:intro} \\
+
+    E23 & Section 5.1.2 needs to be related to the relevant literature that should have been presented in chapter 3.
+    & This section has been moved and re-organised to flow better. & \p{subsection:engines} \\
+
+    E24 & Ch6 - importance of this chapter cannot be understated as it is the primary contribution of your thesis. However, the methodological section appears to be missing with regards to the validation off the apparatus including process, procedures, logistics, experimental setup, etc. as well as a reasoned rationale and justification.
+    & Added a section evaluating the apparatus against the initial requirements, including ease of use. Added detalled advantages and disadvantages compared to other approaches. & \p{validation} \\
+
+    E25 & In addition, what is the benchmark against which you are comparing your contribution? What is the baseline against which any experimental results can be reasonably validated?
+    & Added a section evaluating the apparatus against the initial requirements, including ease of use. Added detalled advantages and disadvantages compared to other approaches. & \p{validation} \\
+
+    E26 & Ch7 - Overall, value of this chapter is unclear in terms of how it contributes to the primary focus of the research. From a methodological perspective its greatest weakness lies in the lack of empirical data to demonstrate its effectiveness, efficiency, and efficacy in comparison to the current state of knowledge.
+    & Moved most of this chapter to an appendix. & \\
+
+    E27 & Ch8 - Similarly, from a methodological perspective this chapter lacks a clear description of the methodological approach including procedures, process, logistics, experimental setup combined with a clear justification and rationale for your choices and approach.
+    & Added detail of how the apparatus setup and how it was validated during development, together with justification of the design choices. & \p{validation} \\
+
+    E28 & The discussion section needs to be significantly improved in terms of the discussion and how this relates to the previous state of knowledge that should have been discussed and identified in literature review.
+    & Restructured and edited the overall discussion and conclusions to refer back to the literature chapter and research objectives. & \p{ce duscussion} \\
+
+    E29 & Ch9 - Considering the significant restructuring, content, and reframing of the contribution, this chapter will need to be rewritten to address the significant changes.
+    & Updated to reflect changes in the rest of the dissertation. & \p{chapter:conclusions} \\
+
+    \hline
+    \multicolumn{4}{c}{Document Annotations} \\
+    \hline
+
+    A1 & P3 - Highlighted Text
+    & Rewrote abstract to reflect new structure as per IN1 and E1. & \\
+
+    A2 & P4 - Weak statement which needs to be more accurate as this is the abstract
+    & Rephrased in more concrete terms. & \\
+
+    A3 & P19 - Formatting error new to subsection number being larger than allowed space
+    & Deep sub-sub-sections removed as per E13. & \\
+
+    A4 & P30 - Elaborate? Where in Thesis?
+    & Re-framed as a 'sustainability ledger' to show the impact of ICT on both sides. & \p{A4} \\
+
+    A5 & P30 - Pencil
+    & No action required. &  \\
+
+    A6 & P31 - Dispose of
+    & Corrected. & \p{A6} \\
+
+    A7 & P31 - Use enumeration here to emphasise the two arguments
+    & Changed to enumeration. & \p{A7} \\
+
+    A8 & P35 - Which paper? Please provide reference
+    & Cited the source. & \p{A8} \\
+
+    A9 & P37 - Could elaborate on this (too brief)
+    & See E7. & \p{chapter:introduction} \\
+
+    A10 & P37 - Sustainability?
+    & Corrected typo and re-wrote that section.  & \p{section:thesis structure} \\
+
+    A11 & P38 - Remove chapter 4 and renumber subsequent chapters
+    & Removed. & \\
+
+    A12 & P38 - Something's wrong here (the word "then" in this context does not make sense)
+    & Reworded to eplain the content of the chapter as static parts rather than as a sequence. & \p{section:thesis structure} \\
+
+    A13 & P38 - This chapter should become an appendix
+    & Moved to an appendix. & \\
+
+    A14 & P40 - Some coverage on origin?
+    & Now includes a (brief) section on the history of the internet. & \p{section:context scale} \\
+
+    A15 & P40 - What is this quote? Please quote the quote and provide a reference
+    & Reference to missing quote removed. & \\
+
+    A16 & P41 - may (seem)
+    & Changed to may. & \p{A16} \\
+
+    A17 & P41 - Why are they mysterious? Please elaborate
+    & Replaced with `undisclosed' and removed the disparaging comment from the `lurid websites'. & \p{A17} \\
+
+    A18 & P41 - Ditto - what do you mean by this statement?
+    & See A17. & \p{A17} \\
+
+    A19 & P45 - perhaps too generic?
+    & Rephrased. & \p{section:context history} \\
+
+    A20 & P46 - more than what? I assume the 1980s configuration?
+    & Rephrased for clarity. & \p{A20} \\
+
+    A21 & P46 - As before - as compared to what?
+    & See A20. & \p{A20} \\
+
+    A22 & P47 - What about plant obsolescence?
+    & Now includes a paragraph on obsolescence. & \p{A22} \\
+
+    A23 & P52 - a hardware
+    & Corrected typo. & \p{A23} \\
+
+    A24 & P52 - will be shown
+    & No longer needed after chapter move. & \p{A23} \\
+
+    A25 & P52 - been done
+    & Reworded. & \p{A23} \\
+
+    A26 & P53 - have
+    & Major rewrite of this area, See E13. & \p{section:context development} \\
+
+    A27 & P53 - This reads oddly Perhaps better in the following section I will elaborate on two commercialand two non-commercial software categories (bullet list)
+    & Major rewrite of this area, See E13. & \p{section:context development} \\
+
+    A28 & P54 - you should avoid using ibid as its outdated and unhelpful - in particular in this case I don't get which previous reference you are implying
+    & Changed \LaTeX referencing scheme. Using (ibid) was the default in the UEA stylesheet. & \\
+
+    A29 & P54 - Perhaps its not the "norm" but there are plenty of high-profile examples including Linux, Unreal Engine, Matlab, Github and many more. So please update your statement
+    & Clarified the meaning of open source with examples and reference to the OSI definition. Note that neither Unreal Engine not Matlab are actually open source according to the OSI definition. & \p{A29} \\
+
+    A30 & P55 - In the same vein as the previous comment on open source - needs evidence using references
+    & See A29. & \p{A29} \\
+
+    A31 & P55 - Research software engineering comment?
+    & Major rewrite to this area. & \p{section:context development} \\
+
+    A32 & P58 - The whole section relates to scalability that is absent in shrink-wrap whilst very important in online apps. I suggest you mention this.
+    & Major rewrite to this area. Now mentions scalability. & \p{section:context development} \\
+
+    A33 & P60 - I assume this is a "negative " effect?
+    & Clarified the implications to make benefits and disadvantages more obvious. & \p{A33} \\
+
+    A34 & P62 - need to elaborate - e.g. using non-functional requirements? or is this outdated?
+    & Now discusses terms such as "non-functional" or "soft" requirements and pick terminology for this thesis. Terms added to the glossary. & \p{A34} \\
+
+    A35 & P64 - better definition of sustainability needed here
+    & The concept of sustainability is key to the whole thesis, so is now discussed in more detail in the introduction. & \p{section:intro about} \\
+
+    A36 & P64 - through
+    & Corrected typo. & \p{A36} \\
+
+    A37 & P65 - Remove, as table is on the next page
+    & Changed "above" to table reference. & \p{A37} \\
+
+    A38 & P65 - Dittio I assume you are referring here to table 2.1. If so use a reference rather than (above) as its not above
+    & Changed "above" to table reference. & \p{A37} \\
+
+    A39 & P66 - makes
+    & Corrected typo. & \p{A39} \\
+
+    A40 & P66 - that
+    & Corrected typo. & \p{A39} \\
+
+    A41 & P66 - poor wording e.g "things". It also excludes the possibility of all requirements being met. So better and simply "prioritise requirements"
+    & Rephrased. & \p{A39} \\
+
+    A42 & P66 - decisio-making
+    & Corrected typo. & \p{A39} \\
+
+    A43 & P66 - on
+    & Corrected. & \p{A39} \\
+
+    A44 & P67 - this needs more clarity. Currently, it sounds like you are mixing up a legacy software term with the previous two
+    & Sentence removed. & \p{A44} \\
+
+    A45 & P68 - perhaps an outdated statement
+    & Removed. & \p{subsection:developer choices} \\
+
+    A46 & P70 - affect
+    & Corrected typo. & \p{testing} \\
+
+    A47 & P70 - incoherent sentence that needs rephrasing
+    & Rephrased. & \p{A47} \\
+
+    A47a & P71 - Again an incoherent sentence that needs rephrasing
+    & Rephrased. & \p{A47a} \\
+
+    A48 & P72 - see previous comment on open source software
+    & Clarified the meaning of open source with examples and reference to the OSI definition. See A29. & \p{A29} \\
+
+    A49 & P72 - this is an outdated reference to back up the recent increase of commercial open source code (eg UE5) You need a much more recent reference here
+    & Clarified the meaning of open source with examples and reference to the OSI definition. See A29. & \p{A29} \\
+
+    A50 & P72 - ditto
+    & Clarified the meaning of open source with examples and reference to the OSI definition. See A29. & \p{A29} \\
+
+    A51 & P72 - as before - old reference (>15 yo) for current observations
+    & Updated references. & \p{A51} \\
+
+    A52 & P76 - It's not very clear here what that "central irony" is
+    & Changed to `distinction'. & \p{section:motivation summary} \\
+
+    A53 & P78 - Glossary instead? (see general comments)
+    & Moved most of this to the glossary. & \p{section:terminology} \p{glossary} \\
+
+    A54 & P78 - See next comment
+    & Edited this section for clarity and added key terms to the glossary. & \p{section:terminology} \\
+
+    A55 & P78 - If ICT is new, why are you citing a 1989 reference?
+    & See A54. & \p{section:terminology} \\
+
+    A56 & P79 - back from computing to ICT now?
+    & See A54. & \p{section:terminology} \\
+
+    A57 & P79 - this needs a table to improve clarity
+    & Converted to a table. & \p{table:energy-units} \\
+
+    A58 & P80 - This and the next sentence needs to be more emphasised asit's absolutely crucial to the remainder of the thesis.
+    & Brought out to separate named paragraph in the key terminology section. & \p{A58} \\
+
+    A59 & P81 - Pencil
+    & No action required. &  \\
+
+    A60 & P81 - see general comment on the need of a glossary
+    & See IN4. & \p{glossary} \\
+
+    A61 & P83 - not quite sure where that was mentioned in 3.1?
+    & Rephrased and reorganised to clarify. & \p{A61} \p{section:terminology}\\
+
+    A62 & P86 - need elaboration on "narrow view" i.e. what is considered and what is not?
+    & Clarified the scope of Penzenstadler's review. & \p{A62} \\
+
+    A63 & P86 - not quite what yoiu mean here? CI and for what?
+    & The distinction between the sustainability of X and the use of X for sustainability is key to this research. A section has been added to the rewritten introduction to introduce this formulation. & \p{A63} \\
+
+    A64 & P90 - this needs further elaboration
+    & Explained more about AWS and cited a reference for their importance. & \p{A64} \\
+
+    A65 & P91 - sustainability
+    & Corrected typo. & \p{A65} \\
+
+    A66 & P97 - this paragraph has more citations than text. Use a bullet-pointed list instead so the actual measurement techniques stand out
+    & Converted to a bullet list. & \p{A66} \\
+
+    A67 & P98 - Related to what? See also general comment on rather arbitrary subsection titles. This section appears to cover comparative methodologies
+    & Renamed to `Comparison Approaches'. & \p{literature:related methods} \\
+
+    A68 & P100 - the first section should have some content, e.g. a brief explanation of what is to follow (see further two comments)
+    & Major rewrite of this area. & \p{literature:gap} \\
+
+    A69 & P100 - What are these two categories?
+    & Refers back to the discussion of Penzenstadler's sustainability of X vs X for sustainability. & \p{literature:gap} \\
+
+    A70 & P101 - OK seems to answer the earlier qquestion but either way this needs to be made clear from the start. E.g this is exactlywhat section 3.3.1 should contain
+    & Re-ordered to introduce key concepts earlier. & \p{A63} \\
+
+    A71 & P101 - So why is it then under section 3.3.1 which is about exclusion
+    & Major rewrite of this area.  & \p{literature:gap} \\
+
+    A72 & P102 - As before - again confusing. Perhaps the best solution is to change the title of 3.3.1
+    & Major rewrite of this area. & \p{literature:gap} \\
+
+    A73 & P103 - still needs to be discovered. Perhaps better O(n log n)?
+    & Now uses $O(n\log{}n)$. Arguably, a radix sort on integers or a bucket sort on a constrained domain can achieve $O(n)$ but, yes, this is not possible for generalised comparison-based sort algorithms. &  \\
+
+    A74 & P104 - same issue as with 3.3.1
+    & Major rewrite of this area.  & \p{literature:gap} \\
+
+    A75 & P106 - This needs a clearer structure
+    & The whole of this section has been re-ordered and this summary has been converted to bullets. & \p{scope:summary} \\
+
+    A76 & P106 - needs a number (or subsection) so you can refer to  it later on. Ditto for the rest
+    & Removed HE study. & \\
+
+    A77 & P106 - Why in section 4.2 considering this is a research objectrive? Additional note, Ch4 will be removed)
+    & Removed HE study. & \\
+
+    A78 & P107 - Same concern as before. Section 5.2 and 5.7 So what about the other chapter 5 sections?
+    & The research objectives section was rewritten for greater clarity and a closer mapping to the rest of the dissertation. & \p{section:research objectives} \\
+
+    A79 ... & strikethrough
+    & Removed HE study. & \\
+
+    A109 & P142 - note that theis is also referred to as a Template Processor
+    & Clarified the terminology and added to the glossary. Se also discussion of terminology for literature searches in chapter 2. & \p{templates and engines} \p{literature:methodology}\\
+
+    A110 & P144 - Numbers here are rather arbitrary and inaccurate.A better effort should be done to come up with better estimates
+    & Reworded to cite the huge popularity of WordPress as a concrete example of a template-using web application and refer to the discussion of the challenges of estimating the size of the internet. & \p{A110} \\
+
+    A111 & P144 - See earlier comment on alternative names, i.e Template Processor and Template Parser
+    & See A109. &  \\
+
+    A112 & P144 - See earlier comments
+    & See A109. &  \\
+
+    A113 & P147 - Not sure what you mean here with templat engines or languages having side effects in the context of control expressions
+    & Clarified the meaning of side-effects in this context and added to glossary. & \p{A113} \\
+
+    A114 & P147 - Note - check with chapter 7 content
+    & This sentence is no longer needed, as the discussion of template engines and languages now follows immediately after. & \p{section:comp:languages} \\
+
+    A115 & P147 - these are very old references. Sentence also needs a full stop
+    & This chapter has been extensively re-structured and edited for better flow and content. & \p{literature:templating} \\
+
+    A116 & P148 - I thought this was by Vosloo and Kourie? so perhaps better .. with what they describe..
+    & Rephrased. & \p{A116} \\
+
+    A117 & P152 - See general comment 10
+    & SEE IN10. &  \\
+
+    A118 & P153 - Use enumeration to emphasise these two aims
+    & Converted to bullet list. & \p{A118} \\
+
+    A119 & P153- This is six years out of date
+    & Updated the reference and discussed the popularity of Java and the limitations of the Tiobe index in the context of the timescale of this research. & \p{language selection} \p{section:timeline} \\
+
+    A120 & P154 - Should be put in a table
+    & Converted to a table. & \p{fs:selection} \\
+
+    A121 & P157 - If TemplateSystem is composite to Test then the latter needs to instantiate the former. There is no evidenc of this in the Test class. Secondly - I thought there more than three template types (5.2.2.) so the diagram should have dots to the right at the level of inheriting template systems?
+    & Described the structure of the test code and how the composition relationship is used. Added a sequence diagram to clarify the flow. & \p{fs:implementation} \\
+
+    A122 & P159 - Is this seconds or milliseconds as later on you are mentioning seconds. E.g. 8 ms (Solomon) for 10000 runs seems fast!
+    & Overall editing pass to make sure timings are correct. And, yes, Solomon really is that fast! & \p{fs:table:times} \\
+
+    A123 & P160 - See before - seconds or milliseconds?
+    & Overall editing pass to make sure timings are correct. & \p{fs:graph:duration} \\
+
+    A124 & P160 - This plot is rather meaningless due to Casper's excessive duration
+    & Explained the graphs and referred to the discussion of individual template engine test durations. & \p{fs:implementation} \\
+
+    A125 & P160 - highlighted text
+    & Overall editing pass to make sure timings are correct. & \p{fs:graph:duration-excluding} \\
+
+    A126 & P162 - table 3.2
+    & Edited this section to emphasise the purpose of the feasibility study and indicate that these problems directly influenced the construction and use of the improved performance study. & \p{A126} \\
+
+    A127 & P162 - this lacks rigour and you should investigate this in more depth
+    & See A126. & \p{A126} \\
+
+    A128 & P162 - ditto
+    & See A126. & \p{A126} \\
+
+    A129 & P162 - this  needs more technical coverage using for example a flow chart
+    & Added some extra description and a sequence diagram to illustrate the flow of control and information between the parts of the test suite. Added a corresponding sequence diagram for the improved performance tests. & \p{fs:implementation} \p{comp:figure:sequence}\\
+
+    A130 & P164 - strikethough
+    & Corrected. & \p{sub:individual template engines} \\
+
+    A131 & P164  - strikethough
+    & Corrected. & \p{sub:individual template engines} \\
+
+    A132 & P164 - as before seconds or milliseconds
+    & Overall editing pass to make sure timings are correct. & \p{sub:individual template engines} \\
+
+    A133 & P164 - what is unusual about it and how does that hinder adoption?
+    & Differences between template engines and template languages are now discussed before the performance studies. & \p{section:comp:languages} \\
+
+    A134 & P164 - Need to refer to chapter 7 (although that one has issues as well)
+    & Differences between template engines and template languages are now discussed before the performance studies. & \p{section:comp:languages} \\
+
+    A135 & P164 - latex error
+    & Corrected typo. & \p{A135} \\
+
+    A136 & P165 - Please be more specific and exact when comapring results, i.e. where is this 10000 times difference coming from?
+    & Now refers to specific results. & \p{fs:discussion} \\
+
+    A137 & P165 - Ditto - needs more detail on who's the best and the worst!
+    & Now refers to specific results. & \p{fs:discussion} \\
+
+    A138 & P165 - This is pretty obvious considering that different engines would not do tests on other engines then to put those resutls in their documentation?
+    & Rewrote the start of the paragraph. & \p{fs:discussion} \\
+
+    A139 & P166 - What do you exactly mean by "preliminary" here? Are you going to improve these results later?
+    & Edited this paragraph to be clearer and more explicit. & \p{A139} \\
+
+    A140 & P166 - As before - further research - when and by who?
+    & Problematic sentence deleted. & \p{A139} \\
+
+    A141 & P168 - how long was this period?
+    & Clarified and added a timeline to the introduction. & ap{section:comp:changes} \p{section:timeline} \\
+
+    A142 & P168 - see previous comment on alternative terms
+    & Clarified terminology and the way it is used in this thesis. See also A109. & \p{section:comp:selecting} \p{literature:methodology} \\
+
+    A143 & P173 - This paragraph needs more clarity
+    & Rewrote. & \p{A143} \\
+
+    A144 & P195 - I skipped most of these pages - see somment 14 in General comments.
+    & Test scripts have been moved to an appendix. & \p{fs2:sets} \\
+
+    A145 & P196 - should be in an appendix
+    & Test scripts have been moved to an appendix. & \p{fs2:sets} \\
+
+    A146 & P197 - Is the time on the ordinate in microseconds? This looks implausible as the text mentions 5 hours.
+    & Overall editing pass to make sure timings are correct. & \p{results:fullsolomon} \\
+
+    A147 & P199 - Needs adaptation as the top six plots are meaningless.
+    & Described in a similar way to the problem with Casper in the feasibility study. More useful figures follow in the sections which discuss the results. & \p{multi:set2} \p{multi:set2-plain} \\
+
+    A148 & P200 - I cannot discern these various types of blue. Perhaps you should use patterns instead - or a mix of patterns and colours?
+    & Redrew plots using a visually distinct colour scheme from \url{https://colorbrewer2.org/}, subsequent results provide both a compact overview and separate, larger, graphs for each scenario with edge labelling rather than a legend. & \p{fs2:results} \p{A148} \\
+
+    A149 & P201 - OK - now we have ms and in the plot we have microseconds?
+    & Overall editing pass to make sure timings are correct. & \p{A149} \\
+
+    A150 & P201 - duration and
+    & Corrected typo. & \p{A150} \\
+
+    A151 & P202 - What is the meaning of this title? And the subsequent content?
+    & Rephrased. & \p{A151} \\
+
+    A152 & P202 - Why did you not test this rather than speculating?
+    & Rephrased. & \p{A152} \\
+
+    A153 & P202 - needs discussion
+    & Explored the pebble source code and potential reasons for this behaviour. & \p{A153} \\
+
+    A154 & P204 - What is the meaning of this?
+    & Explained the meaning of NOTMATCHED in the introduction to this section. & \p{A154} \\
+
+    A155 & P206 - Note that all these tables are just FIgure 5.11.3 in detail.
+    & Clarified the purpose of these tables. & \p{A155} \\
+
+    A156 & P206 - pencil
+    & No action required. &  \\
+
+    A157 & P208 - "accidentally" omitted??
+    & Reworded to explain the benefit of including Handlebars. & \p{comp:set 3} \\
+
+    A158 & P210 - The continuity of this text is lost due to graphs.
+    & Large figures now sit on their own pages and complex figures have been split and re-labelled to improve legibility & \p{multi:set2-plain} \\
+
+    A159 & P211 - Extend caption to point out that this is to remove the noise as shown inf Fig 5.11.4.
+    & Added text to caption. & \p{multi:set3-average} \\
+
+    A160 & P221 - Reiterate what these small changes were.
+    & Reorganised this section to bring together details of these changes. & \p{small changes} \p{A160} \\
+
+    A161 & P223 - enumerate
+    & Converted to bullets. & \p{A161} \\
+
+    A162 & P223 - highlighted text
+    & See A161. &  \\
+
+    A163 & P223 - highlighted text
+    & See A161. &  \\
+
+    A164 & P230 - a
+    & Corrected typo. & \p{Power measurement} \\
+
+    A165 & P235  - use enumeration for clarity
+    & Converted to enumeration. & \p{Preparation} \\
+
+    A166 & P235 - highlighted text
+    & See A165. &  \\
+
+    A167 & P235 - highlighted text
+    & See A165. &  \\
+
+    A168 & P235 - highlighted text
+    & See A165. &  \\
+
+    A169 & P243 - the
+    & Corrected typo. & \p{logging} \\
+
+    A170 & P244 - than
+    & Corrected typo. & \p{logging} \\
+
+    A171 & P249 - Is this not an "unfair" comparison considering that Wordpress allows dynamic content unlike the static pages it's comapred to?
+    & Clarified the point of the comparison. & \p{A171} \\
+
+    A172 & P261 - see earlier comment on static vs dynamic
+    & See A171. &  \\
+
+    A173 & P262 - which are?
+    & Problematic statement deleted. &  \\
+
+    A174 & P264 - I'm not entirely convinced how "apparent" this was as there is no real analysis provided on the actual languages.
+    & Chapter 7 moved to an appendix as per IN17. & \\
+
+    A175 & P264 - OK - so it;s dealt with here then?
+    & The discussion of template engines and template languages has been moved to the start of chapter 4, before the performance tests. & \p{section:comp:languages} \\
+
+    A176 & P266  - in what cohort
+    & Introduced the idea of a cohort earlier. & \p{section:comp:languages} \\
+
+    A177 & P266 - that
+    & Corrected. & \p{A177} \\
+
+    A178 & P267 - as before
+    & See A176. &  \\
+
+    A179 & P269 - the distinctionshould be emphasised
+    & Introducing subsections would clash with the request to avoid deeply nested sections (see E13), so as a compromise, these sections have been presented as titled paragraphs. I hope that is acceptable. & \p{A179} \\
+
+    A180 & P270 - as before - make this a subsection
+    & See A179. &  \\
+
+    A181 & P270 - as before - make this a subsection
+    & See A179. &  \\
+
+    A182 & P270 - as before - make this a subsection
+    & See A179. &  \\
+
+    A183 & P273 - needs further explanation
+    & Discussed in more detail. & \p{comp:nested} \\
+
+    A184 & P275 - which is the same as 7.5
+    & Merged the paragraohs either side of the listing. & \p{A184} \\
+
+    A185 & P276 - strikethrough
+    & Corrected typo. & \p{A185} \\
+
+    A186 ... & 
+    & Chapter 7 moved to an appendix as per IN17. & \\
+
+    A200 & P330 - Shouldn't this have come a lot earlier?
+    & The discussion of template engines and template languages has been moved to the start of chapter 4, before the performance tests. & \p{section:comp:languages} \\
+
+    A201 ... & 
+    & Chapter 7 moved to an appendix as per IN17. &  \\
+
+    A203 & P341 - Why would "slow" imply more energy usage
+    & Now refers to the discussion of assumptions around performance and energy use. & \p{fse discussion} \\
+
+    A204 & P341 - see comment in figure caption
+    & Calculated variance and standard deviation as well as mean to give a more reasoned view of the impact of variations in readings. & \p{A204} \\
+
+    A205 & P341 - What was this tested on? Also the power range is quite small so peaks and troughs are not as significant as indicated.
+    & See A204. &  \\
+
+    A206 & P342 - Why not eliminate background processed. Isn't this one of the advantages of the device used?
+    & Explain about the potential background processes needed by real applications. & \p{A206} \\
+
+    A207 & P343 - !
+    & Clarify the type of machine, and the reason. Referred back to the research timeline. & \p{pc vs dut method} \p{section:timeline} \\
+
+    A208 & P343 - You should therefore report relative performances instead.
+    & Rewrote to discuss specific performance results and included graphs to illustrate the points. & \p{pc dut discussion} \\
+
+    A209 & P346 - Results need to be more rigorously compared.
+    & Rephrased to lead in to the further experiments discussed in later sections. & \p{fse conclusions} \\
+
+    A210 & P350 - correct!
+    & :) &  \\
+
+    A211 & P351 - Chapter 7 will become and appendix.
+    & Chapter 7 moved to an appendix as per IN17. & \p{cce intro} \p{chapter:intermediate}\\
+
+    A212 & P359 - How does this compare to the results in section 8.3.? Or in other words, did the inclusion of GILT shed any better light on energy consumption?
+    & Clarified the use and value of the GILT generator. & \p{A212} \\
+
+    A213 & P360 - Needs a statistical rank test.
+    & Added Kendall's $\tau$ as per IN24. & \p{IN24} \\
+
+    A214 & P362 - Not a great conclusion?
+    & Improved the conclusion to point out that direct energy measurement using something such as the apparatus in this dissertation is a valid alternative to performance-based models. & \p{ce conclusions} \\
+
+    A215 & P432 - Should have been removed.
+    & Removed. &  \\
+
+    
+    \hline
+\end{longtable}
+

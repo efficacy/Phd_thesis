@@ -1,0 +1,139 @@
+\section{What About Other Research?}
+\label{section:literature}
+
+\section{Scope of this Research}
+\label{section:literature scope}
+
+Software and sustainability is a very broad field, much too large for a single PhD, so focus and clarification is needed to decide on a specific research area. \todo{citation} \cite{Penzenstadler2013} divided software sustainability research into two sub-areas: "Software \emph{For} Sustainability", and "Sustainability \emph{Of} Software". Within these sub-areas there are further divisions which are explored below. Even if the research is limited to the environmental impact of software systems, this is a complex, multi-faceted, issue which is much too large to encompass in a single research project. This research will concentrate on energy consumption with the aim of reducing energy use due to software systems and therefore also reducing waste heat and greenhouse gas emissions which contribute to global warming \todo{citation}. While other aspects of sustainability and environmental impact will occasionally be discussed, they are not the core focus of the research.
+
+\subsection{Software \emph{For} Sustainability}
+
+The sub-area which seems to have received the widest coverage in literature is what  \cite{Penzenstadler2013} refers to as "Software \emph{For} Sustainability". This is a broad area which can potentially address any of the UN Sustainability Goals, but which is characterised by the use of computer technology to achieve non-computer goals.
+
+\todo{find and describe some example papers}
+\citep{Knowles2022}
+\citep{Gwaka2022}
+
+Such research is obviously worthwhile, and may end up having a significant positive impact on the world. However, from the point of view of a computer scientist, research in this category often has a significant oversight. It is common in Software \emph{For} Sustainability research to treat the computing resources required to investigate or address an issue as effectively free and without impact. As discussed in the previous section, computer applications and the infrastructure of the internet consume a lot of the world's energy and contribute a lot of waste heat and carbon dioxide to atmosphere, as well as using rare resources and adding waste. Casually assuming that involving computer technology in a solution has negligible side-effects can be potentially dangerous.
+
+\todo{a table of which papers consider cost of computing would be cool here}
+
+\subsection{Sustainability \emph{Of} Software}
+
+The other area mentioned in \cite{Penzenstadler2013} is the sustainability of the software and software systems themselves. There has also been a lot of research which falls into this category, but it is also a broad area, and still too large for a single PhD. This thesis will subdivide this area further into a range of sub-areas:
+\begin{itemize}
+    \item Efficiency and Speed of Algorithms
+    \item Efficiency of Software Development Tools
+    \item Sustainability of Software Development Processes
+    \item Efficiency of Operating Systems and Infrastructure
+    \item Sustainability of Software in Use
+\end{itemize}
+
+\subsection{Efficiency and Speed of Algorithms}
+
+In the early days of computer science research a lot of effort was put into studying algorithms, data structures and their implementation, and this can still be seen in how computer science is taught in many university courses \todo{citation}. While this is important in order to understand the low-level construction of software, it does not have a great deal of relevance to most working software developers. The outcome of such research has long since been absorbed into libraries, programming languages and other development tools.
+
+Most working developers never need to make design decisions at this level, but there is a hidden catch to this layer of abstraction. In order to use libraries and language features, a developer needs a degree of faith in the underlying implementation choices. When using, for example, a sort function in a library, a developer either needs to trust that the implemented algorithm is suitable for the intended use, or perform some extra steps of selection, configuration, or performance testing. In many real-world cases the pressure of commercial development means that the faith approach is the most attractive. This dichotomy between cheap trust or expensive measurement will be explored later in a different context \todo{section link}, but this research is not directly concerned with the efficiency of specific algorithms or data structures.
+
+\subsection{Efficiency of Software Development Tools}
+
+Another area which has traditionally received a lot of interest from computer science research \todo{citation} is the efficiency of development tools such as compilers, interpreters and build systems. This is important, and can have an impact in a large and/or long-running development project. This area is out of scope for this research, however, as it does not generally offer the multiplication factors associated with software deployed to many servers and used by large numbers of users.
+
+\subsection{Sustainability of Software Development Processes}
+
+Although this research is concerned with the decisions made by software developers as they architect, design, and implement large-scale applications, the decision has been made to focus on specific options and choices rather than considering the broader sustainability of the software development process itself. This area certainly deserves further investigation, but has been excluded from this research with the same justification as the exclusion of the efficiency of software development tools. In most cases the environmental impact of a software development team will be small compared with the overall impact of the application in use. \todo {calculation?} \todo{citation?}
+
+There is one exception to this, however. In order to provide context for the experimental methodology in later chapters, this thesis will briefly explore and investigate how software developers learn and how that might influence their choices while developing software applications.
+
+\subsection{Efficiency of Operating Systems and Infrastructure}
+
+Studying and improving the efficiency of operating systems, databases and other low-level infrastructure is also ruled out of scope of this research. While any such improvements would certainly benefit from the multiplication factors of widespread mass use, such changes are out of the control of individual software developers and project teams. Application development is almost always done in a layer above this infrastructure, with such platform decisions made at a corporate architectural level.
+
+In some cases, particularly in virtualised environments, development teams can have some say in choosing between infrastructure options, for example selecting to run an application on Windows or Linux, or choosing between Oracle, MySql or PostgreSQL for data storage. Such decisions would potentially be in scope for this research, but have been excluded for reasons of practicality, in order to concentrate on the kinds of decisions available to a wider range of users.
+
+\subsection{Sustainability of Software in Use}
+
+This research is concerned with the energy impact of application software in use on the Web. Such software deployments exhibit the widest scaling and the heaviest traffic, and therefore have the largest multiplication factors and offer the greatest potential global benefit for even small improvements. One PhD cannot cover ever possible choice or decision available to software developers, so some specific example areas have been chosen with the intention of both providing some concrete experimental data and illuminating the possibilities for future work in this area. Further details of these specific areas follow in later chapters.
+
+\subsection{Server-side, Network or Client-side Software}
+
+Software exists everywhere on the Web. For the sake of argument, software systems can be classified into three rough groups based on the role they play in the operation of the Web. Note that these groups are only rough, as some devices or systems incorporate aspects of multiple groups.
+\begin{itemize}
+    \item Client systems such as phones, tablets, laptops and other computers, televisions, and Internet of Things (IOT) "edge" devices.
+    \item Network systems such as routers and switches, access points, network storage and caching devices.
+    \item Server systems such as web servers, application servers and database servers.
+\end{itemize}
+
+The energy impact of all these systems is important, but this research will concentrate on the energy impact of server systems. Client computer systems have been investigated in a body of existing research, and energy management is already a high priority in battery-powered devices such as phones, tablets and some IOT devices. Network systems are generally included in the power management of the Web infrastructure, which has already been de-scoped from this research. That leaves server systems which fit the criteria for systems which are in continual use by multiple concurrent users and therefore offer large potential gains from a reduction in energy use.
+
+The distinction between different types of server systems is less clear, with many Web-facing servers operating as some combination of web servers, application servers and database servers at the same time depending on the nature of the application. This research will select server systems which are in some way representative of high-volume public web systems and attempt to draw conclusions from those.
+
+\subsection{Static and Dynamic Websites}
+
+The original aim of the web was for the storage and sharing of documents. In some sense this is still true, as each GET request of the HTTP protocol transfers a document from a server to a client \todo{cite HTTP spec}. It is then up to the client software to render that document appropriately for whoever or whatever has requested it. There is, however, a significant distinction in where the document to be transferred comes from.
+
+In a \emph{static} website, all documents, images and other resources are created ahead of time. When a GET request is received, the task of the server is to locate the appropriate resource and send it to the client. In most cases this is a relatively simple process, involving little more than decoding the requested URL into a file path and replying with the contents of the file at that location, or an error if nothing is found. This process is complicated a little by the need to also return an appropriate Content-Type header so the client software knows what to do with the data, but this is usually a simple look-up based on part of the filename.
+
+In a \emph{dynamic} website, some or all of the documents do not exist as files in a file system, but are created when the request is received. Dynamic documents can be created in a wide range of ways, ranging from simple modifications or concatenations of existing files to programmatic approaches using complex calculations, data from databases and even requests to other systems. This wide range of possibilities makes it hard to reason about dynamic websites as a single concept, except to say that extra complexity can require both more time and more energy to serve.
+
+This research will compare the energy usage of static and dynamic websites serving the same data.
+
+\subsection{Page Templating Systems}
+
+As discussed above, there are many ways of dynamically generating a document to respond to a server request. This research will concentrate on one popular method - \emph{templating}. This process uses a single template document to construct many different response documents. A template consists of two kinds of data - fixed parts, which will be the same for all generated documents, and variable parts, which will differ based on data and values which are specific to that generated document. For example, templating could be used on a shopping website such as Amazon.com. Each product page has the same basic structure, but the product images, descriptions, prices and so on are specific to each product page. When the page for a specific product is requested from the server, the data for that product is fetched from a database and used to populate the variable parts of the template, and then the combined result is returned as the response.
+
+\subsection{The Java Language}
+
+There are a large number of programming languages, and testing a meaningful sample of template engines in all of them is not feasible in a single research project. Instead, a single language was selected - a popular language which has a significant usage for server-side programming \todo{cite tiobe} and a non-trivial number of alternative template engines to choose from. That language is Java.
+
+\section{The Literature Landscape}
+\label{section:literature landscape}
+
+\todo{Incomplete}
+
+\subsection{Literature Selection}
+
+\subsection{Experimental Literature}
+
+\subsection{Models and Theory}
+
+\subsection{Educational Literature}
+
+\subsection{Sociological and Psychological Approaches}
+
+\subsection{Grey literature and Anecdotal Evidence}
+
+\section{Research Questions}
+\label{section:research questions}
+
+\todo{Incomplete}
+
+\subsection{Is there a difference in environmental impact of HTTP server choice?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact of application architecture choice?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact between static and dynamic websites?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact of template engine/language choice?}
+\todo{Incomplete}
+
+
+\subsection{What can be done to improve the environmental impact of software choices?}
+\todo{Incomplete}
+
+\section{Connecting This Research with the UN Goals}
+\label{section:connecting with UN goals}
+
+\todo{Incomplete}
+
+\subsection{Sustainability and the UN Goals}
+
+The concept of sustainability is huge, sprawling, and has many differing interpretations \todo{citation}. This had become such a problem that in 2015 the United Nations (UN) divided it into subcategories, known as the seventeen \emph{UN Sustainability Goals} \citep{UnitedNations2015}. This subdivision helps to enable clearer discussion of individual issues and potential solutions, and also to act as a kind of map to the broad landscape of sustainability. The seventeen goals include social, economic and environmental areas as well as technological ones.
+
+This thesis does not attempt to address all seventeen of the UN Sustainability Goals, but concentrates on aspects of three of them: Goal 12 (Responsible Consumption and Production) and Goal 13 (Climate Action) and Goal 9 (Industry, Innovation and Infrastructure). The manner in which this research addresses these goals will be elaborated in further sections of the thesis.

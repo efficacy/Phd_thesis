@@ -1,0 +1,147 @@
+\chapter{How is Software Made?}
+\label{chapter:who}
+
+\section{Who Are Software Developers}
+\label{section:who are software developers}
+
+When software was first envisioned, the working model was one program running on one computer to do one task. Archetypal processing models such as the "Turing Machine" and the "von Neumann architecture" embody this notion and have been used as a basis for most of computing theory \citep{Agar2001}. These concepts were originally so entwined that each was often adapted to fit the other - machines built to run specific programs and programs adapted to run on specific machines \citep{Cortada2006}. As the complexity of the world's hardware and software systems has increased, this model has long been left behind, yet the practice of software development still contains many habits which embody such attitudes. Software engineering as a discipline continues to “lag behind” hardware engineering \citep{Wirth2008}.
+
+Most software development happens on a single machine at a time and initial testing and evaluation of a solution is specific to that machine. Development often continues using a single machine, as time might be lost to "non-reproducible" bugs if development were switched to a significantly different context \citep{ErfaniJoorabchi2014}. Such concerns are usually only delayed, though. At some point every software component or application will be complete enough to be deployed elsewhere for more comprehensive testing. This is a relatively straight-forward process when deployment is to a single target machine, but more and more software is now being deployed to multiple targets or to potentially heterogeneous "cloud" systems. Testing such cloud-based software raises many issues, such as the difficulty of estimating and simulating real scale and real loads, especially for new or unproven products or services \citep{Zhou2013}.
+
+Another key contribution to the complexity of modern software development is the range and variety not just of software tools and libraries, but also of software developers themselves. Evans Data Corporation estimated that in 2017 there were 22 million software developers worldwide, a number that was due to rise to 26 million by 2022 \citep{EvansDataCorporation2018}. All these software developers have different skills, experiences, attitudes and preferences. Take programming languages as an example. Popular software development code repository "GitHub" reported 337 different programming languages in use in 2017 \citep{Github2017}. All these languages have their particular strengths, weaknesses, advantages, disadvantages and situations where they might be more or less appropriate. For software libraries, the situation is considerably worse, with many common problems having many thousands of potential solutions.
+
+Creating software is considerably more than just typing \citep{Brooks1995}. A typical software development role involves responsibilities such as understanding the domain, the problem to be solved, and the constraints on possible solutions; architecture; design; selection of libraries or other components; testing; documentation; planning, communicating with team members and many others. All these responsibilities involve making decisions and many of the decisions can affect the costs and resource usage of the eventual system. The choice between making a new software component and adapting or re-using one which has already been made, for example, is understood to have a significant effect on duration and cost of development \citep{Gacek2002}. However, such choices also potentially impact other factors such as long-term running costs, power usage, cooling and maintenance requirements of the system. Research suggests that these factors are often obscured by the importance placed on "up front" development costs and time to market \citep{Petro2017}, and this is backed up by personal experience.
+
+Software, and the development of software, can be very complex. There are as many ways to develop software as there are individual developers, and even individual developers will vary what they do and how they do it depending on factors such as project requirements, team culture and prior experience. This chapter explores the software development process in order to provide some context for the experimental work in later chapters.
+
+\section{Software Development Situations}
+\label{section:software development situations}
+
+Although individuals and teams have a variety of skills and preferences for particular ways of working, there are some situations which override or channel these preferences into particular approaches. For the sake of simplicity and for the purposes of explanation, the wide variety of software development situations will be grouped into four basic categories. These categories are neither exclusive nor exhaustive, but serve to highlight the kinds of situational factors which cane affect approaches to software development. The four categories to be considered are:
+
+\begin{itemize}
+    \item Open Source, Personal and Hobby Software
+    \item Academic Software
+    \item Commercial Software
+    \item Regulated Software
+\end{itemize}
+
+\paragraph{Open Source, Personal and Hobby Software}
+
+Personal software projects were once dismissed as just a hobby with no significant impact on the wider world. \todo{citation} The rise of the open source movement changed all that \todo{citation} and now open source software which originated as personal or hobby projects can be found in a huge proportion of applications \todo{citation}. Unlike commercial software, open source software is almost always made available to users (who are often themselves other developers) for free, although it may have licence restrictions which constrain or prevent commercial use. Open source software development is usually seen as a social good rather than a quick route to riches \todo{citation}.
+
+The development process for open source software can be very different to that for more traditional commercial and industrial projects. An archetypal open source project is created and maintained by a single individual in his or her spare time, which clearly marks it as a hobby rather than a job. Some open source projects do gain enough popularity to attract other developers or enough financial sponsorship to allow the original developer to work on the project full-time, but this is not the norm.
+
+A single person project which has to fit in around work and family life imposes its own set of constraints. Such projects are often carried out "on the cheap" using equipment and tools intended for other purposes, so are unlikely to have the fastest or most powerful development tools. Time available for development is an even more scarce resource than it is on commercial projects which can result in a slower overall pace of development and particularly a slower response to reported issues. Most significant, though, is the issue of motivation. To keep such a project moving, despite the constraints of the situation, and with little or no chance of requires a high level of personal motivation, and there are many things which can derail or shutdown development on a project. To help keep motivation, individual open source developers have evolved a wide range of techniques, many of which ignore the wider context of the project and potential alternative solutions in favour of "scratching your own itch" \todo{citation}. This, in turn, has led to a profusion of open source solutions to common developer problems.
+
+The wide variety of open source options can be a good thing. If a component you are trying to use does not entirely suit your needs, then there are usually many more to choose from. Often, though, the sheer quantity of options can be overwhelming. As an example, a naive search for a "template engine" at the GitHub open source code repository returned over 12,000 results \citep{GitHub2022}. Template engines will be explored in more depth in later chapters \todo{section link}. Open source software also varies widely in quality, which can significantly impact the selection process. Evaluation of open source component quality will also be explored in later chapters \todo{section link}.
+
+\paragraph{Academic Software}
+
+Academic readers will likely be familiar with academic software development. Software produced in an academic context is usually very different to that produced by independent open source developers, and also very different to that produced in a commercial context. As a broad generalisation, academic software is usually produced for one of two purposes: for teaching and learning or for research. Sometimes, of course. software produced in an academic context may sometimes find its way into public open source projects or into commercial products, but this is not its original intention.
+
+Academic software produced for teaching and learning needs to be short, often short enough to fit on a presentation slide, and it needs to clearly express its learning points. These forces apply both to software produced by teachers for their students to read and to software produced by students for their assessors to read. Other aspects of the software are secondary, and in many cases such teaching software serves no other purpose, and does not need to be complete or even to work. Software produced for teaching is often only made available to enrolled students, and software written by students for assessment is usually kept private to avoid claims of plagiarism, so such academic software is not easy to find and re-use in another project. Software produced for teaching and learning will therefore be excluded from further discussion.
+
+Academic software produced for research is not commonly subject to the length and pedagogical clarity constraints of software produced for teaching and learning, so can be much longer and more complex. In common with commercial projects, such research software is often developed under a deadline and a budget but still needs to achieve some kind of objective. The main difference is that the objective is research rather than profit. A more subtle difference, though, is that research software is often developed by people with plenty of knowledge of the research area, but not necessarily a lot of experience of software development, In this sense it can have more in common with personal software projects on which the developer is learning at the same time. Similarly, academic software is often developed by individuals or very small teams rather than the larger project teams common on commercial projects.
+
+\paragraph{Commercial Software}
+
+Commercial software is subject to some of the same forces as research software, such as cost and time-to-market. Beyond that the forces depend very much on the purpose of the software. No two commercial projects are the same, but just as with the other contexts, commercial software can be grouped into subcategories.
+
+Some commercial software is intended for internal use within the organisation to assist in other business functions. An example might be a job scheduling tool for service engineers such as \emph{Work Manager} developed by British Telecom \citep{Garwood1997}. Such software contributes indirectly to the success of the organisation rather than directly providing revenue. Internal software projects can vary widely in size, complexity and cost, but all have in common that they are considered as a business expense to be minimised rather than a source of income to be maximised. Internal application software is installed and used only within a single organisation which acts as both the developer and the customer. The in-house nature of this kind of software can make it relatively quick and easy to fix problems or add new features without involving any external parties.
+
+Some commercial software is intended for packaging and sale to end-users for installation on their own machines. Colloquially known as "shrink-wrap" software \todo{citation}, this was the dominant form of software delivery from the 1980s until the early 2000s\todo{citation}. In recent years there has been a decline in this form of software, to be replaced by online applications and "software as a service" \todo{citation}. Shrink-wrap software requires a development process which can deliver distinct versions with marketable features while minimising the burden of end-user support. The cost of a new product or new release of an existing product is significant, as can be the penalty for failure if sales don't match up to expectations. Such software therefore requires extensive testing and documentation to minimise problems, which can result in a reluctance to experiment or make changes \todo{citation}.
+
+With the growth of the internet and the web, many commercial software applications are now "delivered" online. The exact nature of such "delivery" varies, but can include browser-based web applications \todo{site Office365}, public online services accessed primarily through an Application Programming Interface (API) \todo{cite AWS}, and client-server applications which combine a custom user interface such as an installable mobile application which accesses a "back end" through a remote API. On the whole the cost of releasing updates to such systems is much less than that for shrink-wrap software, which allows developers to make (or revert) changes without the heavy burden of exhaustive testing and re-documentation, even though this may result in errors. This attitude has been phrased as "Move Fast and Break Things" \citep{Taplin2018}. While the speed and cost of deployment is much lower for these applications, that has been traded for the increased cost and complexity of \emph{running} the applications. With shrink-wrap software the cost of a computer to run the software and the resources to operate it are borne by the user. With internet applications a large part of the cost and resources to run the software is borne by the manufacturer, who has become the \emph{de facto} operator of the system. More customers may imply more income, but also more operational expenses. 
+
+Shrink-wrap software can be relatively simple, as it typically only needs to cater for a single user at a time on a single machine. Each user has their own distinct installation with no impact on any of the others. Most online applications have to cater for large numbers of users, often concurrently, and yet still maintain usable performance and responsiveness. This dramatically increases the complexity of the systems, and many online applications need multiple separate computers running together to keep up with the demand, and developers are tasked with constructing an application which can work effectively and reliably in this context.
+
+One thing that all these categories of commercial software have in common is that product features are driven by business and market analysis rather than personal needs, curiosity, or research funding.
+
+\paragraph{Regulated Software}
+
+The remaining category of software development in this section overlaps somewhat with the other categories, but applies its own set of constraints. In the other categories, the person or organisation developing the software is largely free to do whatever is required to achieve the desired outcome. In a regulated context, however, there are external legal or compliance requirements and these can significantly constrain the development options and process \todo{citation}. The specific regulatory requirements vary with, for example, financial services oversight imposing very different constraints to those on medical equipment development.
+
+\paragraph{Things Change}
+
+As a final point, it is important to note that things can change. A software product can migrate between these groups as it develops and matures, which will necessarily affect the software development context and processes needed to work with it. As an example, the \emph{Work Manager} scheduling software mentioned above started life as an academic research project \citep{Lesaint2003}, became a significant internal product \citep{Garwood1997}, and was then "spun out" as a commercial online service \citep{Trimble2006}.
+
+\section{Products and Projects}
+\label{section:products and projects}
+
+As well as considering the situation and constraints on the software development process it is important to distinguish between a \emph{product} and a \emph{project}. Unfortunately, to some people unfamiliar with any engineering development process these terms can seem largely synonymous, but they have a very different character. This can cause problems when what is needed is a product, but the budget has been decided on the basis that it is a project.
+
+\paragraph{Products}
+
+A \emph{product} in this context is a software artefact with its own existence. As mentioned above this may be a shrink-wrap product sold for installation on a user's computer or it may be an online application or service used by many users. The significant aspect of this is that the product in some sense has a life of its own which extends beyond that of any particular episode of development work. The exact nature of the relationship between software developers and the product varies according to the commercial and process choices of the sponsoring organisation. Some products are created and released, then operate largely untended until some change or new feature is required. Others require continual operational tinkering. Some have a rigid version and release road map, while some change as soon as new code or new ideas are available.
+
+\paragraph{Projects}
+
+A \emph{project} in this context is the confluence of people, time and resources to achieve a particular objective. A project is a very flexible concept, but this research will concentrate on the notion of a software development project, particularly one which is associated with a software (or combined software and hardware) product. A software development project typically has a team of people associated with it, a goal, and a deadline. In most cases there is also the constraint of a budget. A product will typically have several associated projects during its lifetime, including one to create the first version and sometimes one to decommission the product once it reaches the end of its life.
+
+\paragraph{Single Project Products}
+
+In academic software development working with a fixed funding allocation, the concepts of product and project can often be conflated. In such scenarios the product or service ends at the end of the project, so the two are treated as essentially the same thing. This also applies to student research projects with a hard assessment deadline. The side-effects of this conflation can be seen in software documentation which confuses the end result with the means by which it was achieved. This conflation of concepts can be a useful shortcut, but can also cause problems later if further work on the product is required.
+
+\paragraph{Product Lines and Portfolios}
+
+The aim of the above paragraphs was to distinguish the concept of project from product, but it is not really as simple as that. There are many potential layers of complexity above the simple product. The essential distinction between product and project remains, but development projects may end up affecting more than one product at a time, or working on components which are shared between different products.
+
+One such additional layer is the idea of a product line. A software product line consists of several products which share similarities (and often significant parts of their code) but have been adapted to suit different needs or requirements. a Software manufacturer may, for example, release "Home", "Pro" and "Enterprise" versions of the same core product, or provide high-value customers with variants including the customer's own branding and specialist features.
+
+Similar to a product lime, a software portfolio is also a collection of software products, but these typically have much less in common than the products in a product line. For example, a manufacturer may have a product portfolio containing a word processor, a spreadsheet and a slide presentation application. In such scenarios there is often some common code shared between the products, but not always. Software developers may stick with one product, or work on different projects on different products in the portfolio.
+
+\section{Software Development Roles}
+\label{section:software development roles}
+
+Irrespective of the situation in which the software is developed, there are many different roles required to make a success of a software product. In personal products and single project products all or most of these roles will be filled by the same person. In larger teams or organisations these roles may be spread out with one or more people filling each role. Software Engineering theory points out that simply adding more people to a project will not usually make it any faster or more efficient \citep{Brooks1995}, but simply reducing the number of people will not always be advantageous either. Taking on too many roles can lead to conflicting priorities, time wasted switching between contexts, and a lack of time for the deep thinking  required to solve complex problems \citep{Newport2016}.
+
+As the broad field of computing has developed, the names and expectations of the roles in software development have changed, evolved and blurred, but a few representative examples are listed below:
+
+\paragraph{Client, Customer, or Product Owner}
+This role represents the person or organisation which requires or sponsors a product or project. In some cases there is a specific client or customer, and in others there is only a general idea of the characteristics or needs of potential or current customers. Where there is no specific customer, this role is sometimes filled by a customer representative such as a \emph{Product Owner}. The job of this role is to arbitrate on significant choices and make decisions which affect the overall suitability of the product or project. It is important to note that a \emph{Customer} in this sense is not necessarily the same as a \emph{User}. Although it is tempting to assume that features and product behaviour are selected for the benefit of the end user, in commercial software contexts what matters is the opinion of whoever is sponsoring or paying for the product development.
+
+\paragraph{Project Manager}
+The \emph{Project Manager} role is responsible for ensuring that a project completes on time and on budget, and meets the aims for which it was initiated. In cases where these three things cannot all be achieved, the Project Manager is responsible for managing priorities. From a cynical viewpoint, the Project Manager is often the one who will be blamed if things go wrong.
+
+\paragraph{Architect}
+The \emph{Architect} role is responsible for making big technical choices which determine the direction of a product and the projects associated with it. Often this involves tasks such as dividing a large system into smaller subsystems with specific responsibilities and selecting major infrastructure components such as operating systems, databases and cloud platforms.
+
+\paragraph{Designer}
+The \emph{Designer} role has different connotations for different organisations and products. The role can involve software decision making as a kind of shadow of an architect, but it can also involve other areas which do not directly relate to software, such as graphical design and user experience design. The distinction between this role and the \emph{Programmer} role, which often also includes elements of design, is that the pure Designer role does not usually do any programming as such.
+
+\paragraph{Programmer}
+The \emph{Programmer} role is responsible for creating, updating, and fixing the software parts of a project. Historically this role was sometimes split into separate \emph{Analyst} and \emph{Programmer} roles, with an Analyst designing the algorithms and flow of the software for a Programmer to enter. This distinction has largely disappeared, and the Programmer (or often \emph{Developer}) role being responsible for design, coding and some testing of specific parts of a system.
+
+\paragraph{Tester}
+The \emph{Tester} role is responsible for ensuring that the system works as intended. This may happen at the end of the development process, or spread throughout. Testers may test manually by using a system as if they are a real user, or they may be responsible for constructing and running automated tests. Some testers may even have the final say on whether a product, or a particular version of a product, is released at all.
+
+\paragraph{Build, Configuration Management and Deployment}
+For the very simple software often seen in teaching environments, this role may be virtually nonexistent, with software only run on one machine and "deployed" by saving or copying a single file. In more complex products, this role can become a lot more involved, particularly when product lines or product portfolios are involved, or when software needs to be deployed to multiple collaborating systems.
+
+\paragraph{Operation and Maintenance}
+The \emph{Operation and Maintenance} role is particularly important in web applications and \emph{Software as a Service} (SAAS) products. The role is responsible for ensuring that the server-side parts of the application are available and functioning correctly for end users and client-side code to use. This can involve jobs such as monitoring availability and managing responsiveness, as well as increasing or reducing the numbers of participating machines. Vitally, this role has also become responsible for backups and resilience, attack prevention and mitigation, and other cybersecurity functions.
+
+\paragraph{Documentation and Support}
+The final role in this short list is that of \emph{Documentation and Support}. No software product exists in a vacuum, and there will always be a need for some sort of documentation and some sort of support to enable people to use the system. This can be a simple as a README file, or as complex as a multi-layered 24-hours-a-day, 7-days-a-week, support structure backed up by websites, books, videos and other media.
+
+\subsection{Example Combinations of Roles}
+
+Although all the roles listed above have their own responsibilities, they are often combined, and the way that they are grouped together can be indicative of the assumptions and structure of the organisation or project.
+
+\paragraph{The One-Person Team}
+The stereotypical grouping of roles for a small personal or open source project is for one person to do everything in the list above, as well as other organisational functions such as publicity and marketing. This can be a lot to take on, and some roles naturally have greater or lesser priority. Typically, in a one-person team the emphasis is on the architecture, design, and programming roles, with product owner and testing roles usually running second. Sadly this means that build, operation, documentation and support suffer. If the software is released as open source and becomes popular enough, a community of users may emerge and provide some peer support and documentation.
+
+Many of the components which are evaluated in later chapters \todo{section link} are the product of one-person teams and this can be particularly seen in the lack of support and documentation.
+
+\paragraph{The Business Startup Team}
+Exemplified by the "Move Fast and Break Things" attitude \citep{Taplin2018}, many business startups focus strongly on the commercial aspects of a product in order to bring in revenue before things are fully ready. Product owner, designer and architect roles have priority, with documentation and support attempting to make up for the lack of emphasis on programming, testing, configuration management and operation. Often these low-priority roles will be subcontracted, sometimes to just one person.
+
+\paragraph{The Legacy Software Team}
+Once a software product evolves beyond the capability of smaller teams it is common for the team to grow and for people in the team to take on progressively more specialised roles and responsibility for ever more specific niches. This runs the risk of communication issues as discussed in \cite{Brooks1995}. As sub-teams lose the trust of their colleagues, the fast-and-loose approach taken by one-person teams and startups no longer works. A typical response to this is to increase the strictness of the development process, which in turn places a lot more emphasis on testing, build, and configuration management roles, often also accompanied by a growth in the need for documentation and support.
+
+\section{Conclusions}
+\label{section:development conclusions}
+
+\paragraph{code is not built for environmental sustainability}
+\todo{Incomplete}

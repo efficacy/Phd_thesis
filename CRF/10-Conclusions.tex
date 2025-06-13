@@ -1,0 +1,188 @@
+\chapter{Conclusions}
+\label{chapter:conclusions}
+
+\section{Reflection}
+
+This research has explored ways to improve the sustainability, particularly as regards reducing energy consumption and its associated greenhouse gas emissions, of large-scale software systems. Such systems are created and maintained by software developers, so an investigation was carried out into how software developers learn their skills. This study concluded that, despite an increased interest in sustainability among students and guidance from accreditation bodies, UK Higher Education computing courses do not generally appear to include education on improving the sustainability of computing technology. Where teaching of sustainability topics is included, it is mostly about personal and institutional sustainability rather than preparing students to tackle big sustainability issues in their future careers. Other paths into computing careers are more varied and difficult to evaluate, but little evidence of the inclusion of sustainability was found there either.
+
+In the absence of broad training in the development of sustainable software, an approach was explored of improving the energy usage of existing systems by substituting software components with ones which use less energy to do the same job. A feasibility study was conducted which showed that within one category of software components, performance varied by up to thousands of times. Further component performance comparisons were conducted which indicated that individual component performance varies depending on the task and the load. Selecting components with better performance for a particular application could potentially reduce the number of computers needed to run a popular service, thereby reducing both energy usage in operation and the embodied carbon costs of manufacturing and disposal of the hardware.
+
+While optimising performance can help reduce hardware requirements, it is not a direct measurement of energy use. A prototype test apparatus was designed and constructed to support automated, programmable comparison of the energy used by applications or software components under different scenarios and loads. Comparisons using the apparatus produced some interesting results, including that the popular \emph{WordPress} application which is used by a very large number of websites requires a lot more energy to serve each web page than a traditional `static' website.
+
+Substitution of components as a strategy is only feasible if the cost and complexity of replacing one component with another is low. However, software components provide different APIs and are rarely directly interchangeable. To explore potential solutions to this problem, a framework was constructed to simplify the creation of `drivers' for different component APIs. Components can also differ in data formats and data storage requirements. To explore this issue, an intermediate data format and associated conversion tools were created to simplify the generation of appropriate data for each component. This combination of framework, data format, and tools was then used to create more complex scenarios to evaluate the energy consumption of the components compared for performance earlier. The results showed that while in some cases the components which performed fastest also used the least energy, this was not always the case.
+
+The implication of this research is that while improving software performance can help improve sustainability, it is not a good proxy for operational energy usage. A more effective and direct way to assess and reduce the energy usage of a software system is to use an energy comparison apparatus to integrate energy comparison both while evaluating and selecting components and as part of an automated \emph{Continuous Integration} process to track energy usage changes between versions of software.
+
+\section{Evaluation of Research Objectives}
+
+A set of research objectives were described in \autoref{section:research objectives}. This section examines the outcomes and evaluates the effectiveness of this research against these objectives.
+
+\subsection{Explore how software developers learn their skills and the inclusion of sustainability}
+
+This objective was addressed in two phases.
+
+In the first phase, academic literature and public data from the computing industry on the background of software developers were explored in order to direct the next phase of the research in this area. The conclusion of this phase was that although there are many routes into a career in software development, the most popular route is via Higher Education (HE) such as a university or college. However, there was little information about the inclusion of sustainability in this data. 
+
+In the second phase, a study was designed to investigate the inclusion of sustainability topics in UK HE computing courses. The study was intended to examine public course information from all UK universities which offer computing degree courses, but it quickly became apparent that UK universities do not typically provide information in enough detail to determine if their computing courses include coverage of sustainability. The study was extended to request information from course staff about the inclusion of sustainability in their courses. A relatively low proportion of course staff responded to the request, but most respondents replied that there was little or no coverage of sustainability in their computing courses. Further research was then conducted to examine the websites of the same cohort of universities to look for sustainability-related policies. While almost all the universities had some form of sustainability policy in place, most of those were limited to personal or institutional sustainability rather than equipping students to improve the sustainability of their future careers.
+
+This research was partially effective in determining the inclusion of sustainability in the training and education of software developers. Information was hard to obtain, but that which was obtained indicated a general lack of inclusion of sustainability education in software developers' education. However, the relatively small sample of responses reduces confidence in the conclusions.
+
+\subsection{Explore the differences in performance of example software components}
+
+This objective was addressed in three phases.
+
+In the first phase, a representative category of software component was selected and a small cohort of implementations was chosen from within that category. A software performance test harness was created and used to evaluate the performance of the implementations in a range of scenarios. This initial feasibility study clearly indicated a large performance difference between these components. However, there were some issues with the interaction between the performance test harness and the components being evaluated.
+
+In a second phase, an improved performance test harness was constructed to address the issues raised by the feasibility test. This confirmed the large differences in component performance found in the feasibility study and also discovered that component performance varies not only between components and scenarios but also between the volume of requests.
+
+In a third phase, the improved performance tests were executed on a different computing platform. the results of this experiment largely confirmed the results from the second phase, but with some discrepancies.
+
+This research was effective in uncovering the scale and complexity of the performance differences between supposedly-equivalent software components. This stands in sharp contrast to the documentation and other public information available about these components. Such documentation rarely mentions performance, and when it does it is usually in vague terms such as `fast' or `powerful'. Using this information to select components with optimum performance for a desired application could potentially reduce the number of computers needed to serve that application, thus reducing the embodied carbon in the system.
+
+\subsection{Compare the energy use of software during operation}
+
+This objective was addressed in three phases.
+
+In the first phase, an apparatus was designed, constructed and evaluated to assess the energy usage of running software under different scenarios. This phase of the research was very successful and the resulting apparatus was then used for energy comparisons in the following two phases.
+
+In a second phase, the energy comparison apparatus was used to compare the energy usage of a selection of popular web server applications, both when serving static and dynamic web pages. The results of this comparison clearly showed not only a difference in energy usage between servers but also highlighted the large hidden energy cost of dynamic website generation.
+
+In a third phase, the cohort of software components which had been compared for performance were then compared for energy use. Energy use was compared both when re-running the performance evaluation scenarios and when running new scenarios designed to be more representative of common use. The results of this comparison showed differences in the energy usage of the components but the relationship between performance and energy usage was different for each of the components.
+
+This research was effective in showing that an apparatus could be constructed to compare the energy usage of both components and whole applications in a variety of scenarios. Importantly, this apparatus was built for much less cost than traditional lab equipment and provided software interfaces so it could be included in the `continuous integration' processes commonly used to test software during development. Comparisons run on the apparatus revealed the wide range of differences in energy consumption between equivalent software, in particular the much larger energy required to serve websites using WordPress software.
+
+The ability to compare both performance and energy usage of the same software also highlighted the differences in the relationship between the two metrics. Although many attempts have been made in the literature to derive ways of using performance to predict energy usage, this research clearly showed that the relationship between the two varies both between components and between usage scenarios. Any models which claim to relate the two metrics will therefore only be of use in very limited circumstances.
+
+\subsection{Explore substitution of incompatible components using drivers and template generation}
+
+This objective was addressed in two phases.
+
+In the first phase, a driver framework was created to allow independent loading of template engine components into a comparison framework. A new component could be added and compared by writing a driver for the new component with no need to modify or recompile the comparison framework. The comparison framework was used for comparing both component performance and component energy usage.
+
+In a second phase, an intermediate language was designed to represent common features of template languages and a software tool was constructed to convert templates expressed in the intermediate language into the various formats required by different template engines. The template generation tool also used a driver mechanism, allowing new template languages to be added without the need to modify the generation tool. This intermediate language and tool were successfully used to generate representative web pages for template engine comparison, based on a real website, for each of the supported template engines.
+
+This research was effective in showing that there are ways to simplify the complex and potentially expensive task of comparing software components. The development of standard tools for performance and energy usage comparison as well as tools to overcome the differences in component APIs and data formats has helped compare the performance and energy-use differences between components. With the ability to compare components comes the ability to select ones with better performance and lower energy use. This, in turn, could lead to an overall reduction in energy use and associated carbon emissions.
+
+\subsection{Research Objectives Conclusions}
+
+Of the four research objectives, three were very successful, providing a range of contributions to knowledge which should help improve the sustainability of software systems. The objective to explore the inclusion of sustainability in the education of software developers was less successful due to the small amount of available information on which to base conclusions. However, that research did provide the justification for exploring ways to improve the sustainability of software systems through other means which do not require rapid changes to the structure and content of Higher Education.
+
+\section{Contributions To Knowledge}
+\label{section:contributions}
+
+This research has generated several contributions to knowledge, which are described below.
+
+\subsection{The State of Sustainable Computing Teaching in UK HE}
+\label{contrib:HE}
+
+When considering media attention, the requirements of accrediting bodies, and institution publicity, it is easy to assume that Higher Education computing courses are preparing the next generation of software developers and other decision makers to address the ongoing climate emergency and the huge contribution of computing systems to greenhouse gas emissions.
+
+This research has shown that, in the UK at least, this is not yet the case. Courses claim accreditation based on older standards which do not include sustainability clauses, and those institutions which do include sustainability teaching tend to favour personal and institutional sustainability advice such as campus waste recycling programs and remembering to switch off room lighting. Even where teaching staff are aware of bigger issues, it has often proved difficult to fit computing system sustainability topics into an already crowded curriculum.
+
+\subsection{A Novel Self-Contained Apparatus for Comparing Software Performance and Energy Consumption}
+\label{contrib:apparatus}
+
+While there have been several studies which have measured or compared the energy usage of software, they typically involve expensive laboratory equipment or manual measurements, only work with specific computer hardware, or concentrate on the investigation of theoretical models rather than enabling energy measurement and comparison as part of routine software development and testing.
+
+This research has developed a self-contained, low-cost prototype for an apparatus which can be integrated into the automated `continuous integration' processes used by many industry teams when developing and testing software. The apparatus can operate without human intervention to compare performance and energy use of a wide range of software applications and software components  with customisable scenarios and load levels. The apparatus is designed to integrate with automated test systems but also offers a manual web interface which can be useful when evaluating candidate software to include in a project.
+
+\subsection{Energy Use and Performance Comparisons for a Cohort of Web Server Implementations}
+\label{contrib:servers}
+
+The apparatus described in \autoref{chapter:testrig} was evaluated by comparing the energy use and performance of a variety of web server implementations, including two of the most commonly used servers worldwide, to serve some representative web content. The results clearly indicate the differences between the implementations. This information is not available elsewhere.
+
+\subsection{The Relative Energy Usage of WordPress Compared to Static Websites}
+\label{contrib:wordpress}
+
+\emph{WordPress} is a very popular tool for creating, managing, and serving websites, yet users are mostly unaware of its energy consumption. This research has shown that \emph{WordPress} requires many times more energy to serve the same web pages compared with a traditional `static' website.
+
+\subsection{A Novel Extendable Java Framework for Template Engine Comparison}
+\label{contrib:framework}
+
+Selecting a template engine component for a project can be a daunting task. The lack of detailed information provided by the component creators leads to a choice between committing to one component and hoping it is a good choice, or conducting comparative experiments. Constructing rigorous comparative experiments can be complex, but that complexity can be reduced using the template engine comparison software framework constructed for this research. When using this framework all that is needed is to define the template scenarios to be tested and write driver implementations to suit the API of each candidate template engine. The framework takes care of dynamically loading the correct drivers and templates, running the selected scenarios, and collecting results ready for analysis.
+
+\subsection{A Novel Intermediate Language and Generation Tools for Templated Systems}
+\label{contrib:gilt}
+
+Template engines do not just differ in APIs, but also in the markup and syntax used for the templates. Constructing correct templates for an unfamiliar template engine can be both challenging and laborious. Keeping multiple templates in sync with each other as the collection of comparison scenarios and candidate template engines changes or grows can seem like an impossible task. The GILT intermediate language and associated tools assist in generating compatible templates for multiple template engines from a single definition. Adding support for a new template engine requires the writing of a single driver. Addition or modification of a template requires addition or modification of a single GILT template and re-running the template generator.
+
+\subsection{Energy Use and Performance Comparisons for a Cohort of Template Engine Implementations}
+\label{contrib:engines}
+
+As part of this research, the comparison framework described in \autoref{chapter:performance}, the intermediate language described in \autoref{chapter:intermediate}, and the apparatus described in \autoref{chapter:testrig} were utilised to compare the energy usage and performance of a cohort of open source template engines of the kind commonly used for the generation of dynamic web pages. These comparisons involved multiple platforms and a range of scenarios and load levels. This information is not available elsewhere.
+
+\subsection{A Challenge to the Notion of Execution Speed as a Proxy for Software Energy Usage}
+\label{contrib:speed as proxy}
+
+It seems to be a common opinion, even being referred to as `folklore' in one paper, that energy usage of software is in some way related to the time taken to accomplish a task. Many researchers have attempted to construct models to relate the two quantities, in the hope that relatively simple and cheap performance measurements could be used to produce an estimate of energy usage.
+
+This research has shown that when evaluating a range of software which does a broadly similar task, there is no constant or reliable relationship between execution speed and energy use. Different components have different relationships which vary between different evaluation scenarios. This research leads to the conclusion that the only practical and effective way to compare the energy use of software in operation is to measure it.
+
+\subsection{A Challenge to the Notion of Task Complexity as a Proxy for Software Energy Usage}
+\label{contrib:complexity as proxy}
+
+A lot of writing on the topic of software energy usage has made the implicit or explicit assumption that the energy use of a software system is primarily dependent on the complexity of the task the software system performs. This may be true in cases where there is a very large difference in task complexity, and reducing task complexity as a strategy is likely to reduce overall energy usage. However, this research has shown that the architecture and design of the software to perform the task can also make a big difference, even when the task being performed is the same.
+
+\subsection{The Efficacy of Component Substitution as a Strategy to Improve Software Sustainability}
+\label{contrib:efficacy}
+
+This research has discovered major differences in the performance and energy use of different software components when performing similar tasks. This clearly indicates that the choice of software components, either by component selection when designing a new system, or by component substitution in an existing system, could be a viable strategy to improve the sustainability of software 
+
+\section{Future Work}
+\label{section:future work}
+
+Each of the studies in this research has also revealed the potential for further work.
+
+\subsection{How Developers Learn}
+
+While the results of the study on the sustainability content of UK HE computing courses were clear, it was concerning that there was so little public information available about the content of courses and modules. There is the potential to build on this study by investigating course content in more detail and attempting to discover the reasons or justification for why institutions typically make it so difficult both for potential students and for researchers and other interested parties to find out exactly what material is covered. Similarly, there is potential for further work exploring the technology, design and content choices which have led to the generally poor usability and reliability of university websites for such research.
+
+Further research is also possible into the routes into careers in software development. The Stack Overflow Developer Survey \citep{StackOverflow2022} was useful in indicating the large proportion of software developers with a university qualification but stopped short of exploring the particular courses and course content. Such broad instruments provide no real indication of whether working software developers have ever received any education in sustainability. Further investigation, perhaps by surveying or interviewing a more targeted group of software developers might reveal other, potentially more effective, ways of equipping software developers with the understanding and skills needed to address large-scale sustainability problems.
+
+Developer education is only one contributor to improving the sustainability of software. Further research is also needed into how developers and other decision-makers decide what software to make, how to make it, and how to evaluate whether it is suitable for its purpose. Such research could provide vital information on how best to promote information, processes, and tools which could help in developing more sustainable software systems.
+
+\subsection{The Performance of Software Components}
+
+The performance of software components under real conditions is an under-researched area. Historically, academic research has concentrated on the study of algorithms and data structures, but such abstract concepts are less-often considered in practical software development. Instead, software architects and developers attempt to design and construct systems from components but lack detailed information to use when selecting between many candidate components. Although a poor proxy for energy use in general, component performance comparisons can assist in designing software systems which require fewer or less powerful computer hardware systems to support them.
+
+Within the category of template engines, further research is needed to investigate the design and characteristics of the selected components to investigate why their performance is so different, and if any software development or evaluation guidelines can be derived from this information.
+
+This research has concentrated on one specific type of component, but there are a very broad range of software component types available, many of which also have a large number of substitution candidates. Further research is needed on the performance of other types of software component to investigate whether the results from this research are in any way representative.
+
+Further research would also be useful into the impact on application performance of including multiple components and the possibility of models which would be able to predict or estimate overall performance or hardware requirements from a `software bill of materials'.
+
+Most research in this area is limited by a lack of information, so there is also a potential for future research into ways to grow the range, detail and reliability of information available on software components. One approach to this might be to develop tools and and benchmarks which can be used to compare components. For template engine components these might take the form of standardised template scenarios which can be applied to many candidate template engines.
+
+\subsection{An Apparatus To Compare Energy Usage}
+
+The energy comparison apparatus developed in this study was only a prototype and thus there is ample opportunity for further research and development. Potential research areas include:
+
+\begin{itemize}
+    \item evaluating the use of alternative `DUT' platforms to better simulate the hardware used in commercial applications.
+    \item evaluating or developing different energy-measurement circuitry which can deal with larger voltages and currents.
+    \item improving the software to support multiple scenarios in a single test run.
+    \item improving the software and database to support parallel operation of more than one apparatus.
+    \item evolving the apparatus into a robust, self-contained device.
+    \item integrating the apparatus with existing software `continuous integration' processes.
+    \item enhancing the output and presentation of comparison results to better inform decision-making
+\end{itemize}
+
+Further research is also needed in the broader field of software energy usage measurement and communication. The results of energy usage of different software applications and components need to be disseminated so that potential users can make an informed choice without always needing to run their own energy usage comparisons. This in turn would need standards and repeatable methodologies as well as devices such as this apparatus.
+
+\subsection{Substitution of Incompatible Software Components}
+
+The GILT template language described in this dissertation is an initial version only. It has several shortcomings and potential improvements, as discussed in \autoref{comp:int language plus}, and there are many possibilities for further research in this area.
+
+The software developed as part of this research to support substitution of components which are partly functionally equivalent but provide different APIs and data formats was specific to template engine components, but the approach is potentially applicable to other classes of component. Further research would be required to determine how broadly applicable this approach is to other contexts.
+
+\subsection{The Energy Use of Software Components}
+
+The performance results from evaluating the template engine components on the comparison apparatus are interesting, but do not align well with the performance results from the studies in \autoref{chapter:performance}. It was expected that the measured values would be different from the earlier experiments, as they were executed on different computers with different processors. What was not expected, however, was that the performance \emph{rankings} would be so different. There is clearly something else different about the two platforms, which needs further investigation.
+
+The difference in performance rankings raises questions about the accuracy of the energy use comparisons and rankings for the same scenarios. These too need to be investigated, ideally at a range of different request volumes as was done for the performance studies in \autoref{section:fs2}. 
+
+\subsection{Other Related Future Research}
+
+This research has continually shown that there is a lack of detailed and reliable information about software in general, but about software components in particular. Electrical appliances have energy ratings, electronic components have data sheets, but software components mostly have little more than feature lists and usage instructions at best. Further research is needed into ways to obtain, share, and compare information about the characteristics of software components.
+
+The server energy use comparisons in \autoref{chapter:testrig} highlighted the poor performance of dynamic websites and in particular, \emph{WordPress}. Further research is needed into the development of software which can make management of static websites as easy and flexible as \emph{WordPress} but without the high energy cost.

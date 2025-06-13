@@ -1,0 +1,404 @@
+\chapter{Source code referenced in the text}
+\label{appendix:sourcecode}
+
+\verbatimfont{\footnotesize}
+
+\section*{Test code for the Template Engines in the Feasibility Study}
+\label{appendix:smoketest}
+
+Example `Smoke Test' to check that the \emph{TemplateSystem} implementation for a specific template engine compiles and expands a template. Note that this test does not check that the resulting document is fully correct, only that it generates a document containing appropriate context data without errors or crashes.
+
+\begin{verbatim}
+package test;
+
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+import wrapper.TemplateSystem;
+import wrapper.ThymeleafTemplateSystem;
+
+class SingleEngineSmokeTest {
+  @Test
+  void test() {
+    TemplateSystem system = new ThymeleafTemplateSystem();
+    system.defineTemplate("smoke", 
+        "[[# th:each=\"person: *{family}\"] [[${person}]] [/]]");
+    system.putContext("family", Arrays.asList(new String[] { "Frank", "Margaret" }));
+    CheckResult result = system.check("smoke", 1, "hello Frank", "smoke");
+    System.out.println(result);
+  }
+}
+\end{verbatim}
+
+\section*{Test Code for the Template Engine Plugin}
+\label{appendix:plugintest}
+
+Example `Smoke Test' to check that the \emph{TemplateSystem} implementation for a specific template engine compiles and expands a template. Note that this test does not check that the resulting document is fully correct, only that it generates a document containing appropriate context data without errors or crashes.
+
+\begin{verbatim}
+package test;
+
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+import wrapper.TemplateSystem;
+import wrapper.ThymeleafTemplateSystem;
+
+class SingleEngineSmokeTest {
+  @Test
+  void test() {
+    TemplateSystem system = new ThymeleafTemplateSystem();
+    system.defineTemplate("smoke", 
+        "[[# th:each=\"person: *{family}\"] [[${person}]] [/]]");
+    system.putContext("family", Arrays.asList(new String[] { "Frank", "Margaret" }));
+    CheckResult result = system.check("smoke", 1, "hello Frank", "smoke");
+    System.out.println(result);
+  }
+}
+\end{verbatim}
+
+\section*{Template Engine Plugin Driver}
+\label{appendix:driver}
+
+\verb!init()! requires no parameters but is slightly unusual in that it returns an object of type \verb!TemplateEngine!. In most cases this method simply returns the same \verb!TemplateEngine! object that it was called on, but this approach supports \gls{template engine}s with more complex initialisation requirements which might need to create a new or different \verb!TemplateEngine! object. As a beneficial side-effect, this approach also allows for a `fluent' style of method calling \citep{JavaDesignPatterns} as shown in \autoref{code:fluent}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fluent},caption={Fluent method call},captionpos=b]
+    Context context = new MapContext();
+    engine.init().expand(context, "example");
+\end{lstlisting}
+
+\verb!expand()! requires the context and the name of the template as parameters, and returns a text string containing the resulting document. The definition of the \verb!TemplateEngine! interface is shown in \autoref{code:TemplateEngine.java}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:TemplateEngine.java},caption={TemplateEngine interface},captionpos=b]
+package shared;
+import java.io.IOException;
+import com.efsol.context.Context;
+
+public interface TemplateEngine {
+    TemplateEngine init() throws IOException;
+    String expand(Context context, String template) throws IOException;
+}\end{lstlisting}
+
+\section*{Plugin Driver Factory}
+\label{appendix:driverfactory}
+
+The Java \verb!interface! definition for these classes contains just two methods, as shown in \autoref{code:EngineFactory.java}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:EngineFactory.java},caption={EngineFactory interface},captionpos=b]
+package shared;
+
+import java.io.File;
+import java.io.IOException;
+
+public interface EngineFactory {
+    TemplateEngine create(File templateFolder) throws IOException;
+    String getName();
+}
+\end{lstlisting}
+
+Each plugin contains a class named \verb!plugin.EngineFactory! which implements this interface.  As an example, the code for this class in the \emph{Trimou} plugin is shown in \autoref{code:trimou:EngineFactory.java}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:trimou:EngineFactory.java},caption={Trimou EngineFactoy class},captionpos=b]
+package plugin;
+
+import java.io.File;
+import java.io.IOException;
+import shared.TemplateEngine;
+
+public class EngineFactory implements shared.EngineFactory {
+    @Override
+    public TemplateEngine create(File templateFolder) throws IOException {
+        return new TrimouTemplateEngine(templateFolder).init();
+    }
+
+    @Override
+    public String getName() {
+        return "trimou";
+    }
+}
+\end{lstlisting}
+
+\section*{Performance Test Runner}
+\label{appendix:testrunner}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:Run.main},caption={Run class main method},captionpos=b]
+public static void main(String[] args) {
+    List<String> real = new ArrayList<>();
+    for (String arg : args) {
+        if (arg.startsWith("-")) {
+            if ("-v".equals(arg)) {
+                Run.verbose = true;
+            } else if ("-w".equals(arg)) {
+                Run.warmup = true;
+            }
+        } else {
+            real.add(arg);
+        }
+    }
+
+    int nargs = real.size();
+    String engineName = nargs > 0 ? real.get(0) : "dummy";
+    String scenario = nargs > 1 ? real.get(1) : "plain";
+    int n = nargs > 2 ? Integer.valueOf(real.get(2)) : 1;
+
+    try {
+        Run run = new Run(engineName, scenario, n);
+        String stamp = format.format(new Date());
+        CheckResult result = run.execute();
+        if (verbose && result.status() != CheckStatus.OK) {
+            System.err.println(result.engine() + "/" + result.test() + "\n  actual " + result.actual()
+                + "\nexpected " + result.expected());
+        }
+        System.out.println(stamp + "," + result.engine() + "," + result.test() + "," + result.runs() + ","
+            + result.time() + "," + result.status());
+    } catch (Exception e) {
+        System.err.println("ERROR engine:" + engineName + " scenario:" + scenario);
+        e.printStackTrace();
+    }
+}
+\end{lstlisting}
+
+Within the \verb!try!..\verb!catch! block, after processing the command-line arguments, the test runner calls the constructor method of the \verb!Run! class to create a new object, passing in the \gls{template engine} name, scenario name, and the number of times to expand the template. The constructor method stores the parameters for later use, applies the \verb!EngineFactory! technique described above to load and initialise the specified \gls{template engine} driver, and creates a \verb!StopWatch! object to measure the time taken to run the specified number of template expansions. The code for the Run constructor method is shown in \autoref{code:Run.Run}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:Run.Run},caption={Run class constructor method},captionpos=b]
+public Run(String engineName, String scenario, int n) throws IOException {
+    this.engineName = engineName;
+    this.scenario = scenario;
+    this.n = n;
+
+    this.engine = new EngineFactory().create(new File("../" + engineName + "/templates/test/"));
+    this.clock = new StopWatch();
+}
+\end{lstlisting}
+
+Once the \verb!Run! object is constructed, the \verb!execute! method is called to run the experiment. This method returns a \verb!CheckResult! object which contains a tuple of (\gls{template engine}, scenario, number of expansions, time taken, and test status). The test status is determined by whether the result of expanding the template matches the expected result. This result is then emitted as a CSV row which can be appended to a data file for later processing. The code for the \verb!execute! method is shown in \autoref{code:Run.execute}.
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:Run.execute},caption={Run class execute method},captionpos=b]
+private CheckResult execute() throws IOException {
+    TestSpec test = loadTest();
+    Tract page = test.getPage();
+    String templateName = test.getTemplateName();
+
+    // do one run before starting the clock, to separate one-time costs from ongoing ones
+    if (warmup) {
+        engine.expand(page, templateName);
+    }
+    clock.reset();
+    for (int i = 0; i < n - 1; ++i) {
+        engine.expand(page, templateName);
+    }
+    String result = engine.expand(page, templateName);
+    clock.stop();
+
+    return new CheckResult(engineName, scenario, n, clock.get(),
+        test.getExpected().equals(result) ? CheckStatus.OK : CheckStatus.NOTMATCHED,
+        test.getExpected(), result);
+}
+\end{lstlisting}
+
+\section*{Performance Test Scripts}
+\label{appendix:testscripts}
+
+\subsection*{Script \texttt{run.sh}}
+\label{appendix:run.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:run.sh},caption={Script `run.sh'},captionpos=b]
+#!/bin/bash
+engine="${1:-dummy}"
+shift
+scenario="${1:-plain}"
+shift
+n="${1:-1}"
+shift
+#echo run engine=${engine} scenario=${scenario} n=${n} "$@"
+java -classpath "../${engine}/bin:../${engine}/lib"'/*:../shared/bin:bin' runner.Run ${engine} ${scenario} ${n} "$@"
+\end{lstlisting}
+
+\subsection*{Script \texttt{one.sh}}
+\label{appendix:one.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:one.sh},caption={Script `one.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+engine="${1:-dummy}"
+shift
+n="${1:-1}"
+shift
+#echo run engine=${engine} scenario=${scenario} n=${n} "$@"
+for scenario in `ls scenarios`
+do
+  ${here}/run.sh ${engine} ${scenario} ${n} "$@"
+done
+\end{lstlisting}
+
+\subsection*{Script \texttt{all.sh}}
+\label{appendix:all.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:all.sh},caption={Script `all.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+n="${1:-1}"
+shift
+for engine in `find .. -name 'EngineFactory.java' | awk 'FS="/" { print $2 }'`
+do
+if [ ! -f "../${engine}/SKIP" ]
+then
+  ${here}/one.sh ${engine} ${n} "$@"
+fi
+done
+\end{lstlisting}
+
+\subsection*{Script \texttt{fulldata.sh} Wave 1}
+\label{appendix:fulldata1.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fulldata1.sh},caption={Script `fulldata1.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+echo stamp,engine,scenario,n,time,status
+for (( n=1; n <= 10000; n += 1 ))
+do
+ ${here}/all.sh ${n} "$@"
+done
+\end{lstlisting}
+
+\subsection*{Script \texttt{fulldata.sh} Wave 2}
+\label{appendix:fulldata2.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fulldata2.sh},caption={Script `fulldata2.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+echo stamp,engine,scenario,n,time,status
+${here}/all.sh 1 "$@"
+${here}/all.sh 10 "$@"
+${here}/all.sh 100 "$@"
+${here}/all.sh 1000 "$@"
+${here}/all.sh 10000 "$@"
+\end{lstlisting}
+
+\subsection*{Script \texttt{fulldata.sh} Wave 3}
+\label{appendix:fulldata3.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fulldata3.sh},caption={Script `fulldata3.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+echo stamp,engine,scenario,n,time,status
+${here}/all.sh 1 "$@"
+${here}/all.sh 10 "$@"
+${here}/all.sh 20 "$@"
+${here}/all.sh 30 "$@"
+${here}/all.sh 40 "$@"
+${here}/all.sh 50 "$@"
+${here}/all.sh 60 "$@"
+${here}/all.sh 70 "$@"
+${here}/all.sh 80 "$@"
+${here}/all.sh 90 "$@"
+
+for (( n=100; n <= 10000; n += 100 ))
+do
+ ${here}/all.sh ${n} "$@"
+done
+\end{lstlisting}
+
+\subsection*{Script \texttt{fulldata.sh} Wave 4}
+\label{appendix:fulldata4.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fulldata4.sh},caption={Script `fulldata4.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+echo stamp,engine,scenario,n,time,status
+${here}/all.sh 1 "$@"
+${here}/all.sh 10 "$@"
+${here}/all.sh 20 "$@"
+${here}/all.sh 30 "$@"
+${here}/all.sh 40 "$@"
+${here}/all.sh 50 "$@"
+${here}/all.sh 60 "$@"
+${here}/all.sh 70 "$@"
+${here}/all.sh 80 "$@"
+${here}/all.sh 90 "$@"
+
+${here}/all.sh 100 "$@"
+${here}/all.sh 200 "$@"
+${here}/all.sh 300 "$@"
+${here}/all.sh 400 "$@"
+${here}/all.sh 500 "$@"
+${here}/all.sh 600 "$@"
+${here}/all.sh 700 "$@"
+${here}/all.sh 800 "$@"
+${here}/all.sh 900 "$@"
+
+${here}/all.sh 1000 "$@"
+${here}/all.sh 2000 "$@"
+${here}/all.sh 3000 "$@"
+${here}/all.sh 4000 "$@"
+${here}/all.sh 5000 "$@"
+${here}/all.sh 6000 "$@"
+${here}/all.sh 7000 "$@"
+${here}/all.sh 8000 "$@"
+${here}/all.sh 9000 "$@"
+
+${here}/all.sh 10000 "$@"
+\end{lstlisting}
+
+\subsection*{Script \texttt{fulldata.sh} Modified for \emph{Solomon}}
+\label{appendix:fullsolomon.sh}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={code:fullsolomon.sh},caption={Modified `fulldata1.sh'},captionpos=b]
+#!/bin/bash
+here="$(dirname "$(realpath "$0")")"
+echo stamp,engine,scenario,n,time,status
+for (( n=1; n <= 10000; n += 1 ))
+do
+ ${here}/one.sh 'solomon' ${n} "$@"
+done
+\end{lstlisting}
+
+\section*{Code Improvements}
+
+\subsection*{Original \emph{Hapax} Driver}
+\label{appendix:hapax:driver1}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={comp:hapax:driver1},caption={Original \emph{Hapax} Context Loop},captionpos=b]
+for (String key : ContextUtils.iterable(context)) {
+    Object value = context.getObject(key);
+    putContext(key, value);
+}
+\end{lstlisting}
+
+\subsection*{Improved \emph{Hapax} Driver}
+\label{appendix:hapax:driver2}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={comp:hapax:driver2},caption={Updated \emph{Hapax} Context Loop},captionpos=b]
+        dict = TemplateDictionary.create();
+        for (String key : ContextUtils.iterable(context)) {
+            Object value = context.getObject(key);
+            putContext(key, value);
+        }
+\end{lstlisting}
+
+\subsection*{Original \emph{Stringtemplate} Driver}
+\label{appendix:stringtemplate:driver1}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={comp:stringtemplate:driver1},caption={Original \emph{Stringtemplate} expand method},captionpos=b]
+public String expand(Context context, String templateName) {
+    String template = templates.get(templateName);
+    ST engine = new ST(template);
+    for (String key : ContextUtils.iterable(context)) {
+        Object value = context.getObject(key);
+        engine.add(key, value);
+    }
+    return engine.render();
+}
+\end{lstlisting}
+
+\subsection*{Improved \emph{Stringtemplate} Driver}
+\label{appendix:stringtemplate:driver2}
+
+\begin{lstlisting}[backgroundcolor=\color{black!5},escapeinside={(*}{*)},tabsize=2,label={comp:stringtemplate:driver2},caption={Updated \emph{Stringtemplate} expand method},captionpos=b]
+public String expand(Context context, String templateName) throws IOException {
+    StringTemplate template = group.getInstanceOf(templateName);
+    for (String key : ContextUtils.iterable(context)) {
+        Object value = context.getObject(key);
+        template.setAttribute(key, value);
+    }
+    return template.toString();
+}
+\end{lstlisting}

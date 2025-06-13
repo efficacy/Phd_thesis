@@ -1,0 +1,128 @@
+%%%%%%%%%%%%
+%
+% UEAThesisFrontMatter
+% A .tex template for front matter that conforms to the UEA thesis guidelines 
+% (see: https://portal.uea.ac.uk/documents/6207125/6873036/Section%2B3%2BTheses%2BNEW/69d413a9-8639-41d5-8fc2-b391b1a4bfb9)
+% 
+% Version 1.0.1
+% 
+% Compiled by Tom Coleman and Dane Grundy, with thanks to Robert Whittaker for LaTeX knowledge and the UEA PGR office for command suggestions
+%
+% Questions, comments, bugs? Email either d.grundy@uea.ac.uk, danegrundy@googlemail.com or tdhc@st-andrews.ac.uk
+%
+% CC Attribution 4.0 International  (https://creativecommons.org/licenses/by/4.0/)
+%
+%%%%%%%%%%%% 
+%
+% To use: \include this document inside a .tex file with \documentclass{book} (or \documentclass{ueathesis}) and \usepackage{ueathesis}, just after \begin{document}.
+%
+% The sequencing of material in this section is defined by UEA thesis guidelines 2. (9) xiii). Please do not change.
+%
+%%%%%%%%%%%%
+
+%%%%%%%%%%%%
+%
+% Title page
+%
+%%%%%%%%%%%%
+
+
+\thispagestyle{empty}
+\begin{titlepage}
+\begin{center}
+\hrule
+\vspace{1.5em}
+\Huge\textbf{\DocTitle}\par
+\vspace{1em}
+\hrule
+\vspace{0.5in}
+
+\Large{A thesis submitted to the School of Computing Sciences at the University of East Anglia in partial fulfilment of the requirements for the degree of Doctor of Philosophy}\par
+
+\vspace{0.5in}
+
+\LARGE{\AuthorName\\ \Large{\SubmissionMonth\ \SubmissionYear}}\par
+\vspace{0.2in}
+\end{center}
+
+% Copyright disclaimer: required by UEA thesis guidelines 2. (1).
+
+\textcopyright{2024} This copy of the thesis has been supplied on condition that anyone who consults it is understood to recognise 
+that its copyright rests with the author and that use of any information derived there from must be in accordance 
+with current UK Copyright Law. In addition, any quotation or extract must include full attribution.
+
+\end{titlepage}
+%\afterpage{\null\newpage}
+%\thispagestyle{empty}
+
+%%%%%%%%%%%%
+%
+% Abstract % This should be fewer than 300 words on no more than one side of A4 paper, by UEA thesis guidelines.
+%
+%%%%%%%%%%%%
+
+\input{Sections/00-Abstract.tex}
+
+%%%%%%%%%%%%
+%
+% Table of contents
+%
+%%%%%%%%%%%%
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+
+%%%%%%%%%%%%
+%
+% List of figures
+%
+%%%%%%%%%%%%
+
+% If no figures, comment out
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+%%%%%%%%%%%%
+%
+% List of tables
+%
+%%%%%%%%%%%%
+
+% If no tables, comment out
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
+%%%%%%%%%%%%
+%
+% List of listings
+%
+%%%%%%%%%%%%
+
+% If no listings, comment out
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Code Listings}
+\lstlistoflistings
+
+%%%%%%%%%%%%
+%
+% Acknowledgements + dedications
+%
+%%%%%%%%%%%%
+
+\input{Sections/00-Acknowledgements}
+
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+
+%\chapter*{Dedications}
+%\addcontentsline{toc}{chapter}{Dedications}

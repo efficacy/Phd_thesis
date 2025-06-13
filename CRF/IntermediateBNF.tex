@@ -1,0 +1,35 @@
+\chapter{Intermediate Language Specification}
+\label{appendix:bnf initial}
+
+\setlength{\grammarindent}{4em} % increase separation between LHS/RHS 
+\begin{grammar}
+
+<template> ::= <boilerplate> [ <template> ] \alt <placeholder> [ <template> ]
+
+<boilerplate> ::= \emph{any sequence of characters not containing} `¬\{'
+
+<placeholder> ::= `¬{' <action> `}'
+
+<action> ::= `if' <if-clause> [ `then' <replacement> ] [ `else' <replacement> ]
+\alt `foreach' <value>  [ `with' <literal> ] [ <do-clause> [ <sep-clause> ] | <sep-clause> [ <do-clause> ] ]
+\alt `start' <literal>
+\alt `end' <literal>
+\alt <replacement>
+
+<replacement> ::= `block' <literal> | `template' <value> | <value>
+
+<value> ::= `lookup' <value> [ `field' <literal> | `method' <literal> [ <param-clause> ] end ]
+\alt `reference' <literal>
+\alt <literal>
+
+<if-clause> ::= <value> [ `is' <value> ]
+
+<do-clause> ::= `do' <replacement>
+
+<sep-clause> ::= `separate' <replacement>
+
+<param-clause> ::= `parameter' value [ <param-clause> ] 
+
+<literal> ::= `"' \emph{any sequence of characters not containing an unescaped quote character} `"' 
+
+\end{grammar}

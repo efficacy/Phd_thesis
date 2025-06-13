@@ -1,0 +1,556 @@
+\chapter{Literature and Research Questions}
+\label{chapter:questions}
+
+\section{Research Scope and terminology}
+\label{section:literature scope}
+
+Software and sustainability is a very broad field, much too large for a single PhD, so focus and clarification is needed to decide on a specific research area. \citet{Penzenstadler2013} divided software sustainability research into two sub-areas: `Software \emph{For} Sustainability', and `Sustainability \emph{Of} Software'. Within these sub-areas there are further divisions which are explored below. Even if the research is limited to the environmental impact of software systems, this is a complex, multi-faceted, issue which is much too large to encompass in a single research project. This research will concentrate on energy consumption with the aim of reducing energy use due to software systems and therefore also reducing waste heat and greenhouse gas emissions which contribute to global warming \todo{citation}. While other aspects of sustainability and environmental impact will occasionally be discussed, they are not the core focus of the research.
+
+\subsection{Software \emph{For} Sustainability}
+
+The sub-area which seems to have received the widest coverage in literature is what  \cite{Penzenstadler2013} refers to as `Software \emph{For} Sustainability'. This is a broad area which can potentially address any of the UN Sustainability Goals, but which is characterised by the use of computer technology to achieve non-computer goals.
+
+\todo{find and describe some example papers}
+\citep{Knowles2022} Our house is on fire: The climate emergency and computing's responsibility.
+\citep{Gwaka2022} Computer Supported Livestock Systems: The Potential of Digital Platforms to Revitalize a Livestock System in Rural Zimbabwe
+
+Such research is obviously worthwhile, and may end up having a significant positive impact on the world. However, from the point of view of a computer scientist, research in this category often has a significant oversight. It is common in Software \emph{For} Sustainability research to treat the computing resources required to investigate or address an issue as effectively free and without impact. As discussed in the previous section, computer applications and the infrastructure of the internet consume a lot of the world's energy and contribute a lot of waste heat and carbon dioxide to atmosphere, as well as using rare resources and adding waste. Casually assuming that involving computer technology in a solution has negligible side-effects can be potentially dangerous.
+
+\todo{a table of which papers consider cost of computing would be cool here}
+
+\subsection{Sustainability \emph{Of} Software}
+
+The other area mentioned in \cite{Penzenstadler2013} is the sustainability of the software and software systems themselves. There has also been a lot of research which falls into this category, but it is also a broad area, and still too large for a single PhD. This thesis will subdivide this area further into a range of sub-areas:
+\begin{itemize}
+    \item Efficiency and Speed of Algorithms
+    \item Efficiency of Software Development Tools
+    \item Sustainability of Software Development Processes
+    \item Efficiency of Operating Systems and Infrastructure
+    \item Sustainability of Software in Use
+\end{itemize}
+
+\subsection{Efficiency and Speed of Algorithms}
+
+In the early days of computer science research a lot of effort was put into studying algorithms, data structures and their implementation, and this can still be seen in how computer science is taught in many university courses \todo{citation}. While this is important in order to understand the low-level construction of software, it does not have a great deal of relevance to most working software developers. The outcome of such research has long since been absorbed into libraries, programming languages and other development tools.
+
+Most working developers never need to make design decisions at this level, but there is a hidden catch to this layer of abstraction. In order to use libraries and language features, a developer needs a degree of faith in the underlying implementation choices. When using, for example, a sort function in a library, a developer either needs to trust that the implemented algorithm is suitable for the intended use, or perform some extra steps of selection, configuration, or performance testing. In many real-world cases the pressure of commercial development means that the faith approach is the most attractive. This dichotomy between cheap trust or expensive measurement will be explored later in a different context \todo{section link}, but this research is not directly concerned with the efficiency of specific algorithms or data structures.
+
+\subsection{Efficiency of Software Development Tools}
+
+Another area which has traditionally received a lot of interest from computer science research \todo{citation} is the efficiency of development tools such as compilers, interpreters and build systems. This is important, and can have an impact in a large and/or long-running development project. This area is out of scope for this research, however, as it does not generally offer the multiplication factors associated with software deployed to many servers and used by large numbers of users.
+
+\subsection{Sustainability of Software Development Processes}
+
+Although this research is concerned with the decisions made by software developers as they architect, design, and implement large-scale applications, the decision has been made to focus on specific options and choices rather than considering the broader sustainability of the software development process itself. This area certainly deserves further investigation, but has been excluded from this research with the same justification as the exclusion of the efficiency of software development tools. In most cases the environmental impact of a software development team will be small compared with the overall impact of the application in use. \todo {calculation?} \todo{citation?}
+
+There is one exception to this, however. In order to provide context for the experimental methodology in later chapters, this thesis will briefly explore and investigate how software developers learn and how that might influence their choices while developing software applications.
+
+\subsection{Efficiency of Operating Systems and Infrastructure}
+
+Studying and improving the efficiency of operating systems, databases and other low-level infrastructure is also ruled out of scope of this research. While any such improvements would certainly benefit from the multiplication factors of widespread mass use, such changes are out of the control of individual software developers and project teams. Application development is almost always done in a layer above this infrastructure, with such platform decisions made at a corporate architectural level.
+
+In some cases, particularly in virtualised environments, development teams can have some say in choosing between infrastructure options, for example selecting to run an application on Windows or Linux, or choosing between Oracle, MySql or PostgreSQL for data storage. Such decisions would potentially be in scope for this research, but have been excluded for reasons of practicality, in order to concentrate on the kinds of decisions available to a wider range of users.
+
+\subsection{Sustainability of Software in Use}
+
+This research is concerned with the energy impact of application software in use on the Web. Such software deployments exhibit the widest scaling and the heaviest traffic, and therefore have the largest multiplication factors and offer the greatest potential global benefit for even small improvements. One PhD cannot cover ever possible choice or decision available to software developers, so some specific example areas have been chosen with the intention of both providing some concrete experimental data and illuminating the possibilities for future work in this area. Further details of these specific areas follow in later chapters.
+
+\subsection{Server-side, Network or Client-side Software}
+
+Software exists everywhere on the Web. For the sake of argument, software systems can be classified into three rough groups based on the role they play in the operation of the Web. Note that these groups are only rough, as some devices or systems incorporate aspects of multiple groups.
+\begin{itemize}
+    \item Client systems such as phones, tablets, laptops and other computers, televisions, and Internet of Things (IOT) "edge" devices.
+    \item Network systems such as routers and switches, access points, network storage and caching devices.
+    \item Server systems such as web servers, application servers and database servers.
+\end{itemize}
+
+The energy impact of all these systems is important, but this research will concentrate on the energy impact of server systems. Client computer systems have been investigated in a body of existing research, and energy management is already a high priority in battery-powered devices such as phones, tablets and some IOT devices. Network systems are generally included in the power management of the Web infrastructure, which has already been de-scoped from this research. That leaves server systems which fit the criteria for systems which are in continual use by multiple concurrent users and therefore offer large potential gains from a reduction in energy use.
+
+The distinction between different types of server systems is less clear, with many Web-facing servers operating as some combination of web servers, application servers and database servers at the same time depending on the nature of the application. This research will select server systems which are in some way representative of high-volume public web systems and attempt to draw conclusions from those.
+
+\subsection{Static and Dynamic Websites}
+
+The original aim of the web was for the storage and sharing of documents. In some sense this is still true, as each GET request of the HTTP protocol transfers a document from a server to a client \todo{cite HTTP spec}. It is then up to the client software to render that document appropriately for whoever or whatever has requested it. There is, however, a significant distinction in where the document to be transferred comes from.
+
+In a \emph{static} website, all documents, images and other resources are created ahead of time. When a GET request is received, the task of the server is to locate the appropriate resource and send it to the client. In most cases this is a relatively simple process, involving little more than decoding the requested URL into a file path and replying with the contents of the file at that location, or an error if nothing is found. This process is complicated a little by the need to also return an appropriate Content-Type header so the client software knows what to do with the data, but this is usually a simple look-up based on part of the filename.
+
+In a \emph{dynamic} website, some or all of the documents do not exist as files in a file system, but are created when the request is received. Dynamic documents can be created in a wide range of ways, ranging from simple modifications or concatenations of existing files to programmatic approaches using complex calculations, data from databases and even requests to other systems. This wide range of possibilities makes it hard to reason about dynamic websites as a single concept, except to say that extra complexity can require both more time and more energy to serve.
+
+This research will compare the energy usage of static and dynamic websites serving the same data.
+
+\subsection{Page Templating Systems}
+
+As discussed above, there are many ways of dynamically generating a document to respond to a server request. This research will concentrate on one popular method - \emph{templating}. This process uses a single template document to construct many different response documents. A template consists of two kinds of data - fixed parts, which will be the same for all generated documents, and variable parts, which will differ based on data and values which are specific to that generated document. For example, templating could be used on a shopping website such as Amazon.com. Each product page has the same basic structure, but the product images, descriptions, prices and so on are specific to each product page. When the page for a specific product is requested from the server, the data for that product is fetched from a database and used to populate the variable parts of the template, and then the combined result is returned as the response.
+
+\subsection{The Java Language}
+
+There are a large number of programming languages, and testing a meaningful sample of template engines in all of them is not feasible in a single research project. Instead, a single language was selected - a popular language which has a significant usage for server-side programming \todo{cite tiobe} and a non-trivial number of alternative template engines to choose from. That language is Java.
+
+\section{The Literature Landscape}
+\label{section:literature landscape}
+
+\todo{discuss the issues with a requirements approach to sustainability and why it is not enough}
+\todo{discuss the change of literature over the course of the research} (c.f \citep{Balanza-Martinez2023})
+\todo{efficiency vs efficacy}
+
+
+\subsection{Literature Selection}
+
+\subsubsection{overview and other lit reviews}
+
+% \cite{Calero2013} A systematic literature review for software sustainability measures
+% \citep{Balanza-Martinez2023} Tactics for Software Energy Efficiency: A Review
+% \citep{Paradis2021} Architectural tactics for energy efficiency: Review of the literature and research roadmap
+% \citep{Kitchenham2007} Guidelines for performing systematic literature reviews in software engineering
+% \citep{Schuler2023} A systematic review on techniques and approaches to estimate mobile software energy consumption
+% \citep{Lee2024} A survey of energy concerns for software engineering
+% \citep{Chitchyan2016} Sustainability design in requirements engineering: state of practice
+% \citep{Hilty2011} Sustainability and ICT-an overview of the field
+% \citep{Hindle2016} Green software engineering: the curse of methodology
+% \citep{Kern2013} Green Software and Green Software Engineering - Definitions, Measurements and Quality Aspects
+% \citep{Lago2013} Exploring initial challenges for green software engineering: summary of the first GREENS workshop, at ICSE 2012
+% \citep{Penzenstadler2014} Safety, security, now sustainability: The nonfunctional requirement for the 21st century
+% \citep{Penzenstadler2014a} Systematic mapping study on software engineering for sustainability (SE4S)
+% \citep{Venters2023} Sustainable software engineering: Reflections on advances in research and practice
+% \citep{Penzenstadler2012} Sustainability in Software Engineering: A Systematic Literature Review for Building up a Knowledge Base
+% \citep{Ahmad2015} A Review on mobile application energy profiling: Taxonomy, state-of-the-art, and open research issues
+% \citep{Moreira2020} A Systematic Mapping on Energy Efficiency Testing in Android Applications
+
+% \subsection{Environment and big issues}
+
+% \citep{Knowles2022} Our house is on fire: The climate emergency and computing's responsibility.
+% \citep{Steffen2015} Planetary boundaries: Guiding human development on a changing planet
+% \citep{Beattie2010} Why aren't we saving the planet?: a psychologist's perspective
+% \citep{Goodland2002} Sustainability: human, social, economic and environmental
+
+% \citep{Hilty2011a} Information technology and sustainability: Essays on the relationship between information technology and sustainable development
+% \citep{Freitag2021} well researched figures for ICT GHG contribution
+% \citep{Capra2012} data center losses, impact of software on energy consumption
+% \citep{Coroama2009} Energy Consumed vs. Energy Saved by ICT-A Closer Look.
+% \citep{Bashroush2016} ICT Energy Demand: what got us here won't get us there!
+% \citep{Tocze2022a} The Dark Side of Cloud and Edge Computing: An Exploratory Study
+
+% \citep{Pinto2017a} Energy efficiency: A new concern for application software developers
+% \citep{Naumann2008} Sustainability Informatics-A new Subfield of Applied Informatics?
+% \citep{Jagroep2017} Awakening awareness on energy consumption in software engineering
+% \citep{Fonseca2019} A Manifesto for Energy-Aware Software
+% \citep{Manotas2016} An empirical study of practitioners' perspectives on green software engineering
+% \citep{Venters2021} Software Sustainability: Beyond the Tower of Babel
+% \citep{Ournani2020} On reducing the energy consumption of software: From hurdles to requirements
+% \citep{Tilson2010} Research commentary—Digital infrastructures: The missing IS research agenda
+
+% \citep{Gossart2015} Rebound effects and ICT: a review of the literature
+% \citep{Adelmeyer2017} Rebound effects in cloud computing: towards a conceptual framework
+
+% \citep{Penzenstadler2013} Towards a Definition of Sustainability in and for Software Engineering
+% \citep{Penzenstadler2013a} Who is the advocate? Stakeholders for sustainability
+% \citep{Becker2015} Sustainability Design and Software: The Karlskrona Manifesto
+% \citep{Noureddine2014a} Towards a better understanding of the energy consumption of software systems
+% \citep{Noureddine2012} A preliminary study of the impact of software engineering on GreenIT
+% \citep{Esmaeilzadeh2012} What is happening to power, performance, and software?
+% \citep{Koomey2009} Assessing trends over time in performance, costs, and energy use for servers
+
+% \citep{Widdicks2018} Undesigning the Internet: An exploratory study of reducing everyday Internet connectivity
+
+% \citep{Wilke2012} Energy labels for mobile applications
+% \citep{Baek2018} An energy efficiency grading system for mobile applications based on usage patterns
+% \citep{Behrouz2015} Ecodroid: An approach for energy-based ranking of android apps
+
+
+% \citep{Baillot2023} Digital Humanities and the Climate Crisis
+% \citep{Bieser2018} Indirect Effects of the Digital Transformation on Environmental Sustainability: Methodological Challenges in Assessing the Greenhouse Gas Abatement Potential of ICT
+% \citep{Zhan2021a} Atvhunter: Reliable version detection of third-party libraries for vulnerability identification in android applications
+% \citep{Lange2009} Identifying shades of green: The SPECpower benchmarks (solely to measure the 'efficiency' of hardware
+% \citep{Subramaniam2010} Understanding power measurement implications in the green500 list
+% \citep{Moore1965} Cramming more components onto integrated circuits
+
+
+\subsection{Sustainability as requirements and architecture}
+
+% \citep{Condori-Fernandez2019a} A Nichesourcing Framework applied to Software Sustainability Requirements
+% \citep{Roher2013} A proposed recommender system for eliciting software sustainability requirements
+% \citep{Saputri2016} Incorporating sustainability design in requirements engineering process: A preliminary study
+% \citep{Condori-Fernandez2015} Can we know upfront how to prioritize quality requirements?
+% \citep{Gu2012} Aligning economic impact with environmental benefits: A green strategy model
+% \citep{Condori-Fernandez2018} Characterizing the contribution of quality requirements to software sustainability
+% \citep{Marcu2011} Power consumption measurements of virtual machines
+% \citep{Jelschen2012} Towards applying reengineering services to energy-efficient applications
+
+% \citep{Ameller2012} How do software architects consider non-functional requirements: An exploratory study
+% \citep{LaToza2013} A study of architectural decision practices
+% \citep{Venters2017} Software sustainability: Research and practice from a software architecture viewpoint
+% \citep{Kazman2018} Managing Energy Consumption as an Architectural Quality Attribute
+% \citep{Khomh2018} Understanding the impact of cloud patterns on performance and energy consumption
+% \citep{Lago2019} Architecture design decision maps for software sustainability
+
+
+\subsection{Software Development}
+
+% knowledge
+\citep{Pang2016} What Do Programmers Know about Software Energy Consumption?
+
+% development processes
+\citep{Raymond1999} The Cathedral and the Bazaar
+\citep{Ballhausen2019} Free and open source software licenses explained
+\citep{Dick2013} Green software engineering with agile methods
+\citep{Naumann2015} Sustainable software engineering: Process and quality models, life cycle, and social aspects
+
+
+% software change and evolution
+\citep{Couto2020} On energy debt: managing consumption on evolving software
+\citep{Ren2004} Chianti: a tool for change impact analysis of java programs
+\citep{Jagroep2016} Software energy profiling: Comparing releases of a software product
+
+
+% smells and patterns
+\todo{design patterns}
+\citep{Gottschalk2012} Removing energy code smells with reengineering services
+\citep{Palomba2019} On the impact of code smells on the energy consumption of mobile applications
+\citep{Pereira2020} SPELLing out energy leaks: Aiding developers locate energy inefficient code
+\citep{Sahin2012} Initial explorations on design pattern energy usage
+\citep{Noureddine2015a} Optimising energy consumption of design patterns
+\citep{Vetro2013} Definition, implementation and validation of energy code smells: an exploratory study on an embedded 
+\citep{daSilva2010} Evaluation of the impact of code refactoring on embedded software efficiency
+\citep{Litke2005} Energy consumption analysis of design patterns
+
+
+% languages
+\citep{Abdulsalam2014} Program energy efficiency: The impact of language, compiler and implementation choices
+\citep{Pereira2017} Energy Efficiency across Programming Languages
+\citep{Kumar2017} Energy consumption in Java: An early experience
+
+
+% dependencies
+\citep{Bauer2012a} Understanding API usage to support informed decision making in software maintenance
+\citep{Cox2015} Measuring dependency freshness in software systems
+\citep{Decan2017} An empirical comparison of dependency issues in OSS packaging ecosystems
+\citep{Hejderup2018} Software ecosystem call graph for dependency management
+
+% libraries
+\citep{Hasan2016} Energy profiles of java collections classes
+\citep{Pereira2016} The influence of the Java collection framework on overall energy consumption
+\citep{Mileva2009} Mining trends of library usage
+\citep{Mileva2010} Mining API popularity
+\citep{Pinto2016} A comprehensive study on the energy efficiency of java’s thread-safe collections
+
+%quality
+\citep{Taina2011} Good, bad, and beautiful software-In search of green software quality factors
+\citep{Mancebo2021} Does maintainability relate to the energy consumption of software? A case study
+
+\todo{other software engineering papers}
+\citep{Sivasubramaniam2002} Designing energy-efficient software
+% \citep{Hasselbring2018} Software architecture: Past, present, future
+\citep{Vetro2013} Definition, implementation and validation of energy code smells: an exploratory study on an embedded system
+% \citep{Lima2016} Haskell in green land: Analyzing the energy behavior of a purely functional language
+% \citep{Morales2018} Earmo: An energy-aware refactoring approach for mobile apps
+\citep{Abdulsalam2015} Using the Greenup, Powerup, and Speedup metrics to evaluate software energy efficiency
+\citep{Agarwal2012} Sustainable approaches and good practices in green software engineering
+\citep{Bangash2017} A methodology for relating software structure with energy consumption
+\citep{Calero2013a} Sustainability and Quality: Icing on the Cake
+\citep{Chatzigeorgiou2002} Energy metric for software systems
+\citep{Dick2010a} Enhancing Software Engineering Processes towards Sustainable Software Product Design.
+\citep{Honig2014} Proactive Energy-Aware Programming with PEEK
+\citep{Johann2011} Sustainable development, sustainable software, and sustainable software engineering: an integrated approach
+\citep{Kipp2011} Green metrics for energy-aware IT systems
+\citep{Mahmoud2013} A green model for sustainable software engineering
+\citep{Penzenstadler2012a} Supporting sustainability aspects in software engineering
+\citep{Pereira2017a} Energy efficiency across programming languages: how do energy, time, and memory relate?
+system
+\citep{Zhang2014a} A green miner's dataset: mining the impact of software change on energy consumption
+\citep{Tate2005} Sustainable software development: an agile perspective
+\citep{John2014} Green computing strategies for improving energy efficiency in it systems
+\citep{Lago2012} A pragmatic approach for analysis and design of service inventories
+\citep{Lago2015b} A master program on engineering energy-aware software
+\citep{Lago2011} Creating environmental awareness in service oriented software engineering
+\citep{Bener2014} Deploying and provisioning green software
+\citep{Johnson2013} Why don't software developers use static analysis tools to find bugs?
+\citep{Lungu2010} The small project observatory: Visualizing software ecosystems
+\citep{Liu2018a} Energy Consumption Fuzzy Estimation for Object-Oriented Code
+
+\subsection{Reuse: Commercial, Free, and Open Source components}
+
+\todo{what is COTS}
+\citep{Grinter2003} Recomposition: Coordinating a web of software dependencies
+
+\citep{Abate2009} Strong dependencies between software components
+\citep{Basili1996} How reuse influences productivity in object-oriented systems
+\citep{Bavota2013} The evolution of project inter-dependencies in a software ecosystem: The case of apache
+\citep{Bloemen2014} Gentoo package dependencies over time
+\citep{Bogart2015} When it breaks, it breaks: How ecosystem developers reason about the stability of dependencies
+\citep{Bogart2016} How to break an API: cost negotiation and community values in three software ecosystems
+\citep{DeSouza2008} An empirical study of software developers' management of dependencies and changes
+\citep{Decan2016} On the topology of package dependency networks: A comparison of three programming language ecosystems
+\citep{DiCosmo2011} Supporting software evolution in component-based FOSS systems
+\citep{Haefliger2008} Code reuse in open source software
+\citep{Haney2016} NPM and left-pad: Have we forgotten how to program
+\citep{Kabbedijk2011} Steering insight: An exploration of the ruby software ecosystem
+\citep{Lim1994} Effects of reuse on quality, productivity, and economics
+\citep{Manikas2016} Revisiting software ecosystems research: A longitudinal literature study
+\citep{McCamant2003} Predicting problems caused by component upgrades
+\citep{Mockus2007} Large-scale code reuse in open source software
+\citep{Orsila2008} Update propagation practices in highly reusable open source components
+\citep{Sojer2010} Code reuse in open source software development: Quantitative evidence, drivers, and impediments
+\citep{Williams2016} How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript
+\citep{Banker1991} Reuse and productivity in integrated computer-aided software engineering: An empirical study
+\citep{Barns1991} Making reuse cost-effective
+\citep{Bonaccorsi2003} Why open source software can succeed
+\citep{Frakes1994} Success factors of systematic reuse
+\citep{Garud1995} Technological and organizational designs for realizing economies of substitution
+\citep{Hertel2003} Motivation of software developers in Open Source projects: an Internet-based survey of contributors to the Linux kernel
+\citep{Kim1998} Software reuse: Survey and research directions
+\citep{Lakhani2003} Why hackers do what they do: Understanding motivation and effort in free/open source software projects
+\citep{Lerner2002} Some simple economics of open source
+\citep{Lynex1998} Organisational considerations for software reuse
+\citep{MacCormack2006} Exploring the structure of complex software designs: An empirical study of open source and proprietary code
+\citep{Raymond1999} The cathedral and the bazaar: Musings on Linux and Open Source by an accidental revolutionary
+\citep{Rothenberger2003} Strategies for software reuse: A principal component analysis of reuse practices
+\citep{Tracz1995} Confessions of a used program salesman: institutionalizing software reuse
+\citep{VonKrogh2006} The promise of research on open source software
+\citep{Fischer1991} Cognitive tools for locating and comprehending software objects for reuse
+\citep{Zhan2021} Research on third-party libraries in android apps: A taxonomy and systematic literature review
+\citep{Wang2018} Do the dependency conflicts in my project matter?
+\citep{Huang2020} Interactive, effort-aware library version harmonization
+\citep{Wang2020} An empirical study of usages, updates and risks of third-party libraries in java projects
+\citep{Bauer2012} A structured approach to assess third-party library usage
+\citep{Woo2021} CENTRIS: A precise and scalable approach for identifying modified open-source software reuse
+\citep{Xia2023} An empirical study on software bill of materials: Where we stand and the road ahead
+\citep{Davies2013} Software bertillonage: Determining the provenance of software development artifacts
+\citep{Amrit2010} Coordination implications of software coupling in open source projects
+\citep{David2008} Community-based production of open-source software: What do we know about the developers who participate?
+\citep{Ferrari2008} Software architecting without requirements knowledge and experience: What are the repercussions?
+\citep{Koch2008} Effort modeling and programmer participation in open source software projects
+
+\subsection{selecting components and libraries}
+
+\citep{Hucka2018} Literature and survey which explores how software developers and non-software developers find and evaluate software
+\citep{LariosVargas2020} Selecting Third-Party Libraries: The Practitioners’ Perspective
+\citep{Xu2020} Why reinventing the wheels? An empirical study on library reuse and re-implementation
+\citep{Pano2018} Factors and actors leading to the adoption of a JavaScript framework
+\citep{Milkman2009} How can decision making be improved?
+\citep{Nguyen2020} CrossRec: Supporting software developers by recommending third-party libraries
+\citep{Lima2020} What are the characteristics of popular APIs? A large-scale study on Java, Android, and 165 libraries
+\citep{delaMora2018a} Which library should I use? A metric-based comparison of software libraries
+\citep{Anwar2020} Should energy consumption influence the choice of android third-party http libraries?
+
+\citep{delaMora2018} An empirical study of metric-based comparisons of software libraries
+\citep{Zaimi2015} An empirical study on the reuse of third-party libraries in open-source software development
+\citep{Arnott2006} Cognitive biases and decision support systems development: a design science approach
+\citep{Langner2023} Characterizing Software Energy Consumption in Mobile Application Development to Support Third-Party-Library Selection
+\citep{Goodwin2004} Decision analysis for management judgment
+\citep{Anthony2016} Green IS for sustainable decision making in software management
+\citep{Fritz2011} Determining relevancy: how software developers determine relevant information in feeds
+\citep{Schuler2020} Characterizing energy consumption of third-party api libraries using api utilization profiles
+
+\subsection{methodology Literature}
+
+\citep{Ivarsson2011} A method for evaluating rigor and industrial relevance of technology evaluations
+
+Rigor is defined as the precision of the research approach and its documentation. It is measured via three parameters, namely: (i) context, i.e., how well the context is presented, and if its description is sufficient to make objective comparisons with other contexts, (ii) study design, i.e., the products, resources and processes used in the evaluation, and (iii) validity, i.e., any limitations or threats to the validity of the evaluation and the measures taken to limit them. The three parameters are measured with the values “weak”, “medium”, and “strong”
+
+\citep{Halle2018} Streamlining the inclusion of computer experiments in a research paper
+\citep{Kalliamvakou2014} The promises and perils of mining github
+\citep{Krishnamurthi2015} The real software crisis: Repeatability as a core value
+\citep{Smith2016} Software citation principles
+\citep{Ardito2019} Methodological guidelines for measuring energy consumption of software applications
+\citep{Dyba2005} Evidence-Based Software Engineering for Practitioners
+\citep{VanSolingen2002} Goal question metric (gqm) approach
+\citep{Harman2015} Achievements, open problems and challenges for search based software testing
+\citep{Saborido2015} On the impact of sampling frequency on software energy measurements
+\citep{Noureddine2013} A Review of Energy Measurement Approaches
+\citep{Islam2016} Measuring energy footprint of software features
+\citep{Sahin2014} How do code refactorings affect energy usage?
+\citep{Ardito2015} Understanding green software development: A conceptual framework
+\citep{Vetro2011} Monitoring it power consumption in a research center: seven facts
+\citep{Procaccianti2011} Profiling power consumption on desktop computer systems
+\citep{Poess2010} Energy benchmarks: a detailed analysis
+
+\subsection{Software performance measurement}
+
+\citep{Georges2007} Statistically Rigorous Java Performance Evaluation General
+\citep{Blackburn2004} Myths and realities: The performance impact of garbage collection
+\citep{Blackburn2006} The DaCapo benchmarks: Java benchmarking development and analysis
+\citep{Gu2006} Relative factors in performance analysis of Java virtual machines
+\citep{Hauswirth2004} Vertical profiling: understanding the behavior of object-priented applications
+\citep{Lilja2005} Measuring computer performance: a practitioner's guide
+\citep{Maebe2006} Javana: A system for building customized Java program analysis tools
+\citep{Sweeney2004} Using Hardware Performance Monitors to Understand the Behavior of Java Applications.
+\citep{Sachs2009} Performance evaluation of message-oriented middleware using the SPECjms2007 benchmark
+
+\subsection{Other approaches}
+
+\subsubsection{Performance != Energy usage}
+\citep{Capra2012} Is software “green”? application development environments and energy efficiency in open source applications
+\citep{Li2014b} An empirical study of the energy consumption of android applications
+\citep{Lima2016} Haskell in green land: Analyzing the energy behavior of a purely functional language
+\citep{Yuki2013} Folklore Confirmed: Compiling for Speed Compiling for Energy
+\citep{SPEC2008} SPECpower\_ssj 2008
+\citep{Khomh2018} Understanding the impact of cloud patterns on performance and energy consumption
+
+
+\subsubsection{Models vs measurement}
+\citep{Bornholt2012} The model is not enough: Understanding energy consumption in mobile devices
+\citep{Colmant2018} The next 700 CPU power models
+
+\citep{Manotas2013} Investigating the impacts of web servers on web application energy usage
+
+
+\citep{Pereira2021}  Ranking programming languages by energy efficiency
+% \citep{Bunse2013} On the energy consumption of design patterns
+% \citep{Aggarwal2015} GreenAdvisor: A tool for analyzing the impact of software evolution on energy consumption
+\citep{Eder2017} Energy-aware software engineering
+\citep{Manotas2014} Seeds: A software engineer's energy-optimization decision support framework
+\citep{Marantos2021} A flexible tool for estimating applications performance and energy consumption through static analysis
+\citep{Sabovic2020} Accurate online energy consumption estimation of {IoT} devices using energest
+\citep{Brooks2000} Wattch: A framework for architectural-level power analysis and optimizations
+\citep{Joseph2001} Live, runtime power measurements as a foundation for evaluating power/performance tradeoffs
+\citep{Chen2002} Tuning garbage collection in an embedded Java environment
+\citep{Gurumurthi2002} Using complete machine simulation for software power estimation: The softwatt approach
+\citep{Dick2000} Power analysis of embedded operating systems
+\citep{Vijaykrishnan2000} Energy-driven integrated hardware-software optimizations using SimplePower
+\citep{Bourdon2013} Powerapi: A software library to monitor the energy consumed at the process-level
+\citep{Pathak2011} Fine-grained power modeling for smartphones using system call tracing
+\citep{Ardito2013} gLCB: an energy aware context broker
+\citep{Ibrahim2011} A precise high-level power consumption model for embedded systems software
+\citep{Honig2012} SEEP: exploiting symbolic execution for energy-aware programming
+\citep{Jung2012} DevScope: a nonintrusive and online power analysis tool for smartphone hardware components
+\citep{Yoon2012} AppScope: Application Energy Metering Framework for Android Smartphone Using Kernel Activity Monitoring
+\citep{Li2013} Calculating source line level energy information for android applications
+\citep{Li2014a} An investigation into energy-saving programming practices for android smartphone app development
+\citep{Li2014b} An empirical study of the energy consumption of android applications
+\citep{Sahin2012a} Towards power reduction through improved software design
+\citep{Hao2012} Estimating Android Applications’ CPU Energy Usage via Bytecode Profiling
+\citep{Seo2008a} Component-level energy consumption estimation for distributed java-based software systems
+\citep{Aggarwal2014} The power of system call traces: predicting the software energy consumption impact of changes.
+\citep{Amsel2011} Toward sustainable software engineering (nier track)
+\citep{Chowdhury2019} Greenscaler: training software energy models with automatic test generation
+\citep{Shenoy2011} Green software development model: An approach towards sustainable software development
+\citep{Tanelli2008} Model identification for energy-aware management of web service systems
+\citep{Bircher2007} Complete system power estimation: A trickle-down approach based on performance events
+\citep{Chen2005b} Reducing power with performance constraints for parallel sparse applications
+\citep{Hsu2003} The design, implementation, and evaluation of a compiler algorithm for CPU energy reduction
+\citep{Naumann2008a} How Green is the Web? Visualising the Power Quality of Websites.
+\citep{Lafond2006} An energy consumption model for an embedded java virtual machine
+\citep{Manotas2013} Investigating the impacts of web servers on web application energy usage
+\citep{Amsel2010} Green tracker: a tool for estimating the energy consumption of software
+\citep{Hao2013} Estimating mobile application energy consumption using program analysis
+\citep{Hindle2012} Green mining: A methodology of relating software change to power consumption
+\citep{Hindle2012a} Green mining: Investigating power consumption across versions
+\citep{Abtahizadeh2015} How green are cloud patterns?
+\citep{Ampatzoglou2012} A methodology to assess the impact of design patterns on software quality
+\citep{Liu2015} Data-oriented characterization of application-level energy optimization
+\citep{Mahmoud2013a} A green model for sustainable software engineering
+\citep{Schuler2020} Characterizing energy consumption of third-party api libraries using api utilization profiles
+\citep{Linares-Vasquez2014} Mining energy-greedy api usage patterns in android apps: an empirical study
+\citep{Carroll2010} An analysis of power consumption in a smartphone
+\citep{Chung2011} Aneprof: Energy profiling for android java virtual machine and applications
+\citep{Tiwari1994} Power analysis of embedded software: A first step towards software power minimization
+\citep{Albertao2010} Measuring the sustainability performance of software projects
+\citep{Fischer2015} Sema: An approach based on internal measurement to evaluate energy efficiency of android applications
+\citep{Couto2015} GreenDroid: A tool for analysing power consumption in the android ecosystem
+\citep{Ahmad2018} Enhancement and assessment of a code-analysis-based energy estimation framework
+
+\citep{Aggarwal2015} investigated system call logs as a proxy for energy usage, verified by a DUT/LOAD/CTRL-style test rig. while not guaranteed, system call log seems a good way to catch and eliminate some software changes which will have negligible energy impact
+
+\subsection{Energy Measurement devices and technology}
+
+\citep{Snowdon2005} Power measurement as the basis for power management
+
+\citep{Ardito2018} Measures power usage using expensive test equipment
+\citep{Bekaroo2016} Measures power usage of a range of hardware using different approaches. For Raspberry Pi uses 'Eco-Worthy electronic wattmeter' on the AC line
+\citep{Kaup2014} uses an external power meter
+\citep{Astudillo-Salinas2016} uses an external current sensor
+\citep{Sabovic2020} uses `Energest' MCU software module without external hardware also described in \citep{Dunkels2007}
+\citep{Zhou2013a} Nemo designed for in-situ measurement of specific battery-powered devices
+\citep{Stathopoulos2008} LEAP2 uses custom ASIC for power measurement
+\citep{Jiang2007} SPOT uses relatively complex custom circuitry
+\citep{Dutta2008} iCount relies on specific voltage regulator circuitry being present in the target device
+\citep{Andersen2009} Energy Bucket uses custom hardware with modified USB cables and state tracking software to accumulate energy usage during different software states
+\citep{Naderiparizi2016} $\mu$Monitor uses 'coulomb counting' designed for measurement of very low currents in battery equipment
+\citep{Kanso2023} Proposes a system for measuring and modeling power usage of computing devices, and uses it to measure the power consumption of some Raspberry Pis. Also includes some kind of queryable crowd-sourced power profile repository. Not clear if it is internal or external measurement.
+\citep{Kesrouani2020} Attempts to build a model of Raspberry Pi energy usage using a Pi 3B+. Claims to measure the energy usage due to software but is really just comparing different language implementations of some alternative benchmarks (fibonacci and towers of hanoi) rather than any kind of real applications which use networks and storage etc.
+\citep{Kaup2018} compared 'efficiency' of several generations of Raspberry Pi using PowerSpy2
+\citep{Do2009} ptop: A process-level power profiling tool
+\citep{Flinn1999} Powerscope: A tool for profiling the energy usage of mobile applications
+\citep{Kansal2008} Fine-grained energy profiling for power-aware application design
+\citep{Kant2009} Toward a science of power management
+\citep{Lewis2008} Run-time Energy Consumption Estimation Based on Workload in Server Systems.
+\citep{Noureddine2012a} Runtime monitoring of software energy hotspots
+\citep{Petre2008} Energy-aware middleware
+\citep{Seo2007a} An energy consumption framework for distributed java-based systems
+\citep{Seo2008} Estimating the energy consumption in pervasive java-based systems
+\citep{Wilke2013} Jouleunit: a generic framework for software energy profiling and testing
+\citep{Ge2009} Powerpack: Energy profiling and analysis of high-performance systems and applications
+\citep{Sinha2001} Jouletrack: A web based tool for software energy profiling
+\citep{Fonseca2008} Quanto: Tracking Energy in Networked Embedded Systems.
+\citep{Farkas2000} Quantifying the energy consumption of a pocket computer and a Java virtual machine
+
+\subsection{Software comparisons}
+
+\citep{Baynes2003} The performance and energy consumption of embedded real-time operating systems
+
+\subsection{Models and Theory}
+
+\citep{Cho2008} Corollaries to Amdahl's law for energy
+\citep{Cho2009} On the interplay of parallelization, program performance, and energy consumption
+\citep{Naumann2011} The GREENSOFT Model: A reference model for green and sustainable software and its engineering
+\citep{Zeng2002} ECOSystem: Managing energy as a first class operating system resource
+
+\subsection{rigs like mine}
+
+\citep{Dezfouli2018} EMPIOT test rig in some ways like mine. tests it on a low-power IOT device
+\citep{Capra2012a} Measuring application software energy efficiency, another test rig a bit like mine
+\citep{Hindle2014} Greenminer: a hardware based mining software repositories software energy consumption framework
+\citep{Dzhagaryan2016} An environment for automated measurement of energy consumed by mobile and embedded computing devices
+\citep{Rice2010} Measuring mobile phone energy consumption for 802.11 wireless networking (measures using expensive DAQ across a shunt)
+\citep{Milosevic2013} An environment for automated power measurements on mobile computing platforms (measures using expensive DAQ across a shunt)
+
+\subsection{Computing Education}
+\citep{Gordon2010} Education for sustainable development in Computer Science
+\citep{Gough2018} Monitoring progress towards implementing sustainability and representing the UN sustainable development goals (SDGs) in the curriculum at UWE Bristol
+\citep{Gordon2014} Enhancing employability through sustainable computing
+\citep{Hamilton2015} Learning and teaching computing sustainability
+\citep{Payne2010} Motivating sustainability literacy
+\citep{Cayzer2010} Enabling the 98 percent: the role of sustainable IT in the modern computer science syllabus
+\citep{Hilty2018} Motivating students on ICT-related study programs to engage with the subject of sustainable development
+\citep{Brooks2019} ICT Sustainability from Day One
+
+\subsection{Sociological and Psychological Approaches}
+
+\subsection{Grey literature and Anecdotal Evidence}
+
+\citep{Podder2020} How Green Is Your Software?
+
+\section{Research Questions}
+\label{section:research questions}
+
+\todo{Incomplete}
+
+\subsection{Is there a difference in environmental impact of HTTP server choice?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact of application architecture choice?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact between static and dynamic websites?}
+\todo{Incomplete}
+
+
+\subsection{Is there a difference in environmental impact of template engine/language choice?}
+\todo{Incomplete}
+
+
+\subsection{What can be done to improve the environmental impact of software choices?}
+\todo{Incomplete}
+
+\section{Connecting This Research with the UN Goals}
+\label{section:connecting with UN goals}
+
+\todo{Incomplete}
+
+\subsection{Sustainability and the UN Goals}
+
+The concept of sustainability is huge, sprawling, and has many differing interpretations \todo{citation}. This had become such a problem that in 2015 the United Nations (UN) divided it into subcategories, known as the seventeen \emph{UN Sustainability Goals} \citep{UnitedNations2015}. This subdivision helps to enable clearer discussion of individual issues and potential solutions, and also to act as a kind of map to the broad landscape of sustainability. The seventeen goals include social, economic and environmental areas as well as technological ones.
+
+This thesis does not attempt to address all seventeen of the UN Sustainability Goals, but concentrates on aspects of three of them: Goal 12 (Responsible Consumption and Production) and Goal 13 (Climate Action) and Goal 9 (Industry, Innovation and Infrastructure). The manner in which this research addresses these goals will be elaborated in further sections of the thesis.
